@@ -1,0 +1,4 @@
+enum WorkLocation {
+  workFromHome,
+  office,
+}

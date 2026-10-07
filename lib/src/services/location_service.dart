@@ -2,68 +2,131 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
-  static const double officeLatitude = 13.679558684704288;
-  static const double officeLongitude = 100.60937316907061;
-  static const double allowedRadius = 10.0;
-
+  LocationService._();
 
   /// Check if location services are enabled
   static Future<bool> isLocationServiceEnabled() async {
-    return await Geolocator.isLocationServiceEnabled();
+    return Geolocator.isLocationServiceEnabled();
   }
 
-  /// Check location permissions
+  /// Check location permission
   static Future<LocationPermission> checkPermission() async {
-    return await Geolocator.checkPermission();
+    return Geolocator.checkPermission();
   }
 
-  /// Request location permissions
+  /// Request location permission
   static Future<LocationPermission> requestPermission() async {
-    return await Geolocator.requestPermission();
+    return Geolocator.requestPermission();
   }
 
   /// Get current position
   static Future<Position> getCurrentPosition() async {
-    return await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
+    const locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      timeLimit: Duration(seconds: 15),
+    );
+
+    return Geolocator.getCurrentPosition(
+      locationSettings: locationSettings,
     );
   }
 
-  /// Calculate distance between two points in km
+  /// Calculate distance in KM
   static double calculateDistance(
       double startLatitude,
       double startLongitude,
       double endLatitude,
       double endLongitude,
       ) {
-    return Geolocator.distanceBetween(
+    final distanceInMeters = Geolocator.distanceBetween(
       startLatitude,
       startLongitude,
       endLatitude,
       endLongitude,
-    ) /
-        1000; /// Convert meters to km
+    );
+
+    return distanceInMeters / 1000;
   }
 
   /// Check if user is within allowed radius
-  static Future<bool> isWithinOfficeRadius(double? lat,double? long,double? allowDistanceRadius) async {
+  ///
+  /// IMPORTANT:
+  /// allowedRadiusInKm must also be KM.
+  static Future<bool> isWithinOfficeRadius(
+      double? targetLatitude,
+      double? targetLongitude,
+      double? allowedRadiusInKm,
+      ) async {
     try {
+      debugPrint('');
+      debugPrint('================ LOCATION CHECK ================');
+
+      debugPrint('Target Lat >>> $targetLatitude');
+      debugPrint('Target Long >>> $targetLongitude');
+      debugPrint('Allowed Radius >>> $allowedRadiusInKm km');
+
+      if (targetLatitude == null || targetLongitude == null) {
+        debugPrint('ERROR >>> Target latitude/longitude is null');
+        return false;
+      }
+
+      if (allowedRadiusInKm == null || allowedRadiusInKm <= 0) {
+        debugPrint('ERROR >>> Invalid allowed radius');
+        return false;
+      }
+
+      if (!_isValidLatitude(targetLatitude) ||
+          !_isValidLongitude(targetLongitude)) {
+        debugPrint('ERROR >>> Invalid latitude/longitude');
+        return false;
+      }
+
       final position = await getCurrentPosition();
-      debugPrint("CurrentLat>>>>>>${position.latitude}");
-      debugPrint("CurrentLong>>>>>>>>${position.longitude}");
-      debugPrint("OfficeLat>>>>>>$lat");
-      debugPrint("OfficeLong>>>>>>>>$long");
-      debugPrint("AllowDistance>>>>>>>>$allowDistanceRadius");
-      final distance = calculateDistance(
+
+      debugPrint('Current Lat >>> ${position.latitude}');
+      debugPrint('Current Long >>> ${position.longitude}');
+      debugPrint('Accuracy >>> ${position.accuracy} meters');
+
+      final distanceInKm = calculateDistance(
         position.latitude,
         position.longitude,
-        lat ?? 0.0,
-        long ?? 0.0,
+        targetLatitude,
+        targetLongitude,
       );
-      debugPrint("Distance>>>>>>$distance");
-      return distance <= allowDistanceRadius!;
-    } catch (e) {
+
+      final isWithinRadius =
+          distanceInKm <= allowedRadiusInKm;
+
+      debugPrint(
+        'Distance >>> ${distanceInKm.toStringAsFixed(3)} km',
+      );
+
+      debugPrint(
+        'Allowed >>> ${allowedRadiusInKm.toStringAsFixed(3)} km',
+      );
+
+      debugPrint('Is Within Radius >>> $isWithinRadius');
+
+      debugPrint('================================================');
+      debugPrint('');
+
+      return isWithinRadius;
+    } catch (error, stackTrace) {
+      debugPrint('LOCATION CHECK ERROR >>> $error');
+
+      debugPrintStack(
+        stackTrace: stackTrace,
+      );
+
       return false;
     }
+  }
+
+  static bool _isValidLatitude(double latitude) {
+    return latitude >= -90 && latitude <= 90;
+  }
+
+  static bool _isValidLongitude(double longitude) {
+    return longitude >= -180 && longitude <= 180;
   }
 }
