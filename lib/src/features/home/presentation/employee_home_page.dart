@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import 'package:hr_app/src/common_widgets/admin_custom_app_bar_view.dart';
@@ -96,7 +97,13 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     try {
       await ref.read(homeRepositoryProvider).fetchEmployeeAddresses();
 
-      currentTimezone = await FlutterTimezoneExtension.getCurrentTimezone();
+      try {
+        final timezone = await FlutterTimezoneExtension.getCurrentTimezone();
+
+        currentTimezone = normalizeTimezone(timezone);
+      } catch (e) {
+        debugPrint('Failed to get timezone: $e');
+      }
 
       final user = await ref.read(secureStorageProvider).getUser();
 
@@ -118,6 +125,12 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
       debugPrintStack(stackTrace: stackTrace);
     }
+  }
+
+  String normalizeTimezone(String timezone) {
+    const aliases = {'Asia/Rangoon': 'Asia/Yangon'};
+
+    return aliases[timezone] ?? timezone;
   }
 
   /// ===========================================================
@@ -1019,9 +1032,12 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
       appBar:
           isManagementUser
-              ? const AdminCustomAppBarView(
+              ? AdminCustomAppBarView(
                 title: 'Check-in/out',
                 isShowRightIcon: false,
+                onBackPressed: () {
+                  context.go('/');
+                },
               )
               : CustomToolbarWithLogo(
                 onMenuTap: () {
@@ -1135,7 +1151,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
                                       20.vGap,
 
-                                      // WORK LOCATION
+                                      /// WORK LOCATION
                                       WorkLocationSelector(
                                         selectedLocation: _selectedLocation,
                                         savedLocation: savedWorkLocation,
@@ -1144,7 +1160,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
                                       40.vGap,
 
-                                      // HEADER
+                                      /// HEADER
                                       AttendanceHeader(
                                         currentTime: currentTime,
                                       ),
@@ -1161,8 +1177,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
                                             color: kPrimaryColor,
                                           ),
                                         )
-                                      else if (hasIncompletePreviousCheckout &&
-                                          statusData != null)
+                                      else if (hasIncompletePreviousCheckout)
                                         PreviousCheckoutCard(
                                           onAddCheckout: () async {
                                             final attendanceDate =

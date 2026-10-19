@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class YesterdayCheckoutSuccessPage extends StatelessWidget {
+import '../../../routing/go_router/go_router_delegate.dart';
+import '../../../utils/secure_storage.dart';
+import '../../../utils/strings.dart';
+
+class YesterdayCheckoutSuccessPage extends ConsumerWidget {
   const YesterdayCheckoutSuccessPage({
     super.key,
   });
@@ -10,14 +16,26 @@ class YesterdayCheckoutSuccessPage extends StatelessWidget {
   static const Color _buttonColor = Color(0xFFFBE7A2);
   static const Color _darkTextColor = Color(0xFF465267);
 
-  void _goToCheckIn(BuildContext context) {
-    Navigator.of(context).popUntil(
-          (route) => route.isFirst,
-    );
+  void _goToCheckIn(BuildContext context, WidgetRef ref) {
+    final loginUserRole = ref.read(getLoginUserRoleProvider).value;
+
+    final isManagementRole = [
+      kLoginUserRoleCeo,
+      kLoginUserRoleDirector,
+      kLoginUserRoleManager,
+    ].contains(loginUserRole);
+
+    if (isManagementRole) {
+      context.go(RoutePath.employeeHome.path);
+    } else {
+      Navigator.of(context).popUntil(
+            (route) => route.isFirst,
+      );
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -30,7 +48,7 @@ class YesterdayCheckoutSuccessPage extends StatelessWidget {
           foregroundColor: Colors.white,
           leading: IconButton(
             onPressed: () {
-              _goToCheckIn(context);
+              _goToCheckIn(context,ref);
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -108,7 +126,7 @@ class YesterdayCheckoutSuccessPage extends StatelessWidget {
                   height: 54,
                   child: ElevatedButton(
                     onPressed: () {
-                      _goToCheckIn(context);
+                      _goToCheckIn(context,ref);
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
