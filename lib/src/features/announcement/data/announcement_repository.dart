@@ -81,13 +81,13 @@ class AnnouncementRepository {
 }
 
 @riverpod
-AnnouncementRepository announcementRepository(AnnouncementRepositoryRef ref) {
+AnnouncementRepository announcementRepository(Ref ref) {
   return AnnouncementRepository(dio: ref.watch(dioProvider()),ref: ref);
 }
 
 @riverpod
 Future<AnnouncementResponse> fetchAnnouncements(
-    FetchAnnouncementsRef ref,{int? businessUnitId}
+    Ref ref,{int? businessUnitId}
     ) async {
   final provider = ref.watch(announcementRepositoryProvider);
   return provider.fetchAnnouncementData(businessUnitId: businessUnitId);
@@ -95,7 +95,7 @@ Future<AnnouncementResponse> fetchAnnouncements(
 
 @riverpod
 Future<AnnouncementDetailResponse> fetchAnnouncementDetailByID(
-    FetchAnnouncementDetailByIDRef ref, {
+    Ref ref, {
       required int announcementID,
     }) async {
   final provider = ref.watch(announcementRepositoryProvider);

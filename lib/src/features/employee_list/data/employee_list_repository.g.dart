@@ -6,305 +6,210 @@ part of 'employee_list_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(employeeListRepository)
+final employeeListRepositoryProvider = EmployeeListRepositoryProvider._();
+
+final class EmployeeListRepositoryProvider
+    extends
+        $FunctionalProvider<
+          EmployeeListRepository,
+          EmployeeListRepository,
+          EmployeeListRepository
+        >
+    with $Provider<EmployeeListRepository> {
+  EmployeeListRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'employeeListRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$employeeListRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<EmployeeListRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  EmployeeListRepository create(Ref ref) {
+    return employeeListRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(EmployeeListRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<EmployeeListRepository>(value),
+    );
+  }
+}
+
 String _$employeeListRepositoryHash() =>
     r'46f4453c07d9b3ffdb85316894e694a7b33e6781';
 
-/// See also [employeeListRepository].
-@ProviderFor(employeeListRepository)
-final employeeListRepositoryProvider =
-    AutoDisposeProvider<EmployeeListRepository>.internal(
-      employeeListRepository,
-      name: r'employeeListRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$employeeListRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef EmployeeListRepositoryRef =
-    AutoDisposeProviderRef<EmployeeListRepository>;
-String _$fetchEmployeeListDataHash() =>
-    r'a35c7953b7e077270eb91cd06fa4c27066155a34';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [fetchEmployeeListData].
 @ProviderFor(fetchEmployeeListData)
-const fetchEmployeeListDataProvider = FetchEmployeeListDataFamily();
+final fetchEmployeeListDataProvider = FetchEmployeeListDataFamily._();
 
-/// See also [fetchEmployeeListData].
-class FetchEmployeeListDataFamily
-    extends Family<AsyncValue<EmployeeListResponse>> {
-  /// See also [fetchEmployeeListData].
-  const FetchEmployeeListDataFamily();
+final class FetchEmployeeListDataProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<EmployeeListResponse>,
+          EmployeeListResponse,
+          FutureOr<EmployeeListResponse>
+        >
+    with
+        $FutureModifier<EmployeeListResponse>,
+        $FutureProvider<EmployeeListResponse> {
+  FetchEmployeeListDataProvider._({
+    required FetchEmployeeListDataFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchEmployeeListDataProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// See also [fetchEmployeeListData].
-  FetchEmployeeListDataProvider call({required int pageNo}) {
-    return FetchEmployeeListDataProvider(pageNo: pageNo);
+  @override
+  String debugGetCreateSourceHash() => _$fetchEmployeeListDataHash();
+
+  @override
+  String toString() {
+    return r'fetchEmployeeListDataProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  FetchEmployeeListDataProvider getProviderOverride(
-    covariant FetchEmployeeListDataProvider provider,
-  ) {
-    return call(pageNo: provider.pageNo);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  $FutureProviderElement<EmployeeListResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchEmployeeListDataProvider';
-}
-
-/// See also [fetchEmployeeListData].
-class FetchEmployeeListDataProvider
-    extends AutoDisposeFutureProvider<EmployeeListResponse> {
-  /// See also [fetchEmployeeListData].
-  FetchEmployeeListDataProvider({required int pageNo})
-    : this._internal(
-        (ref) => fetchEmployeeListData(
-          ref as FetchEmployeeListDataRef,
-          pageNo: pageNo,
-        ),
-        from: fetchEmployeeListDataProvider,
-        name: r'fetchEmployeeListDataProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$fetchEmployeeListDataHash,
-        dependencies: FetchEmployeeListDataFamily._dependencies,
-        allTransitiveDependencies:
-            FetchEmployeeListDataFamily._allTransitiveDependencies,
-        pageNo: pageNo,
-      );
-
-  FetchEmployeeListDataProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.pageNo,
-  }) : super.internal();
-
-  final int pageNo;
-
-  @override
-  Override overrideWith(
-    FutureOr<EmployeeListResponse> Function(FetchEmployeeListDataRef provider)
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchEmployeeListDataProvider._internal(
-        (ref) => create(ref as FetchEmployeeListDataRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        pageNo: pageNo,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<EmployeeListResponse> createElement() {
-    return _FetchEmployeeListDataProviderElement(this);
+  FutureOr<EmployeeListResponse> create(Ref ref) {
+    final argument = this.argument as int;
+    return fetchEmployeeListData(ref, pageNo: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchEmployeeListDataProvider && other.pageNo == pageNo;
+    return other is FetchEmployeeListDataProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, pageNo.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FetchEmployeeListDataRef
-    on AutoDisposeFutureProviderRef<EmployeeListResponse> {
-  /// The parameter `pageNo` of this provider.
-  int get pageNo;
-}
+String _$fetchEmployeeListDataHash() =>
+    r'a35c7953b7e077270eb91cd06fa4c27066155a34';
 
-class _FetchEmployeeListDataProviderElement
-    extends AutoDisposeFutureProviderElement<EmployeeListResponse>
-    with FetchEmployeeListDataRef {
-  _FetchEmployeeListDataProviderElement(super.provider);
+final class FetchEmployeeListDataFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<EmployeeListResponse>, int> {
+  FetchEmployeeListDataFamily._()
+    : super(
+        retry: null,
+        name: r'fetchEmployeeListDataProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  FetchEmployeeListDataProvider call({required int pageNo}) =>
+      FetchEmployeeListDataProvider._(argument: pageNo, from: this);
 
   @override
-  int get pageNo => (origin as FetchEmployeeListDataProvider).pageNo;
+  String toString() => r'fetchEmployeeListDataProvider';
+}
+
+@ProviderFor(searchEmployeeListData)
+final searchEmployeeListDataProvider = SearchEmployeeListDataFamily._();
+
+final class SearchEmployeeListDataProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<EmployeeListResponse>,
+          EmployeeListResponse,
+          FutureOr<EmployeeListResponse>
+        >
+    with
+        $FutureModifier<EmployeeListResponse>,
+        $FutureProvider<EmployeeListResponse> {
+  SearchEmployeeListDataProvider._({
+    required SearchEmployeeListDataFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'searchEmployeeListDataProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchEmployeeListDataHash();
+
+  @override
+  String toString() {
+    return r'searchEmployeeListDataProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<EmployeeListResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<EmployeeListResponse> create(Ref ref) {
+    final argument = this.argument as String;
+    return searchEmployeeListData(ref, query: argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SearchEmployeeListDataProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$searchEmployeeListDataHash() =>
     r'a0f9dfdf27a401f3747cbde14cd7142a8a006e18';
 
-/// See also [searchEmployeeListData].
-@ProviderFor(searchEmployeeListData)
-const searchEmployeeListDataProvider = SearchEmployeeListDataFamily();
-
-/// See also [searchEmployeeListData].
-class SearchEmployeeListDataFamily
-    extends Family<AsyncValue<EmployeeListResponse>> {
-  /// See also [searchEmployeeListData].
-  const SearchEmployeeListDataFamily();
-
-  /// See also [searchEmployeeListData].
-  SearchEmployeeListDataProvider call({required String query}) {
-    return SearchEmployeeListDataProvider(query: query);
-  }
-
-  @override
-  SearchEmployeeListDataProvider getProviderOverride(
-    covariant SearchEmployeeListDataProvider provider,
-  ) {
-    return call(query: provider.query);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'searchEmployeeListDataProvider';
-}
-
-/// See also [searchEmployeeListData].
-class SearchEmployeeListDataProvider
-    extends AutoDisposeFutureProvider<EmployeeListResponse> {
-  /// See also [searchEmployeeListData].
-  SearchEmployeeListDataProvider({required String query})
-    : this._internal(
-        (ref) => searchEmployeeListData(
-          ref as SearchEmployeeListDataRef,
-          query: query,
-        ),
-        from: searchEmployeeListDataProvider,
+final class SearchEmployeeListDataFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<EmployeeListResponse>, String> {
+  SearchEmployeeListDataFamily._()
+    : super(
+        retry: null,
         name: r'searchEmployeeListDataProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$searchEmployeeListDataHash,
-        dependencies: SearchEmployeeListDataFamily._dependencies,
-        allTransitiveDependencies:
-            SearchEmployeeListDataFamily._allTransitiveDependencies,
-        query: query,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  SearchEmployeeListDataProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.query,
-  }) : super.internal();
-
-  final String query;
+  SearchEmployeeListDataProvider call({required String query}) =>
+      SearchEmployeeListDataProvider._(argument: query, from: this);
 
   @override
-  Override overrideWith(
-    FutureOr<EmployeeListResponse> Function(SearchEmployeeListDataRef provider)
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: SearchEmployeeListDataProvider._internal(
-        (ref) => create(ref as SearchEmployeeListDataRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        query: query,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<EmployeeListResponse> createElement() {
-    return _SearchEmployeeListDataProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is SearchEmployeeListDataProvider && other.query == query;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, query.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
+  String toString() => r'searchEmployeeListDataProvider';
 }
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin SearchEmployeeListDataRef
-    on AutoDisposeFutureProviderRef<EmployeeListResponse> {
-  /// The parameter `query` of this provider.
-  String get query;
-}
-
-class _SearchEmployeeListDataProviderElement
-    extends AutoDisposeFutureProviderElement<EmployeeListResponse>
-    with SearchEmployeeListDataRef {
-  _SearchEmployeeListDataProviderElement(super.provider);
-
-  @override
-  String get query => (origin as SearchEmployeeListDataProvider).query;
-}
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

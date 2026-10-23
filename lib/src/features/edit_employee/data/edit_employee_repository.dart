@@ -34,6 +34,6 @@ class EditEmployeeRepository {
 }
 
 @riverpod
-EditEmployeeRepository editEmployeeRepository(EditEmployeeRepositoryRef ref) {
+EditEmployeeRepository editEmployeeRepository(Ref ref) {
   return EditEmployeeRepository(dio: ref.watch(dioProvider()));
 }

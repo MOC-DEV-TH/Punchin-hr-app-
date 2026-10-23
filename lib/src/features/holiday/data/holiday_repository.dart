@@ -36,13 +36,13 @@ class HolidayRepository {
 }
 
 @riverpod
-HolidayRepository holidayRepository(HolidayRepositoryRef ref) {
+HolidayRepository holidayRepository(Ref ref) {
   return HolidayRepository(dio: ref.watch(dioProvider()));
 }
 
 @riverpod
 Future<HolidayResponse> fetchHolidays(
-    FetchHolidaysRef ref,{int? businessUnitId}
+    Ref ref,{int? businessUnitId}
     ) async {
   final provider = ref.watch(holidayRepositoryProvider);
   return provider.fetchHolidayData(businessUnitId: businessUnitId);

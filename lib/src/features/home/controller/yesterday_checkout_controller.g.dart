@@ -6,25 +6,51 @@ part of 'yesterday_checkout_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(YesterdayCheckoutController)
+final yesterdayCheckoutControllerProvider =
+    YesterdayCheckoutControllerProvider._();
+
+final class YesterdayCheckoutControllerProvider
+    extends $AsyncNotifierProvider<YesterdayCheckoutController, void> {
+  YesterdayCheckoutControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'yesterdayCheckoutControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$yesterdayCheckoutControllerHash();
+
+  @$internal
+  @override
+  YesterdayCheckoutController create() => YesterdayCheckoutController();
+}
+
 String _$yesterdayCheckoutControllerHash() =>
     r'fc0a74f6bdc5035bfacb8ab8214363714bbc4837';
 
-/// See also [YesterdayCheckoutController].
-@ProviderFor(YesterdayCheckoutController)
-final yesterdayCheckoutControllerProvider = AutoDisposeAsyncNotifierProvider<
-  YesterdayCheckoutController,
-  void
->.internal(
-  YesterdayCheckoutController.new,
-  name: r'yesterdayCheckoutControllerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$yesterdayCheckoutControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$YesterdayCheckoutController = AutoDisposeAsyncNotifier<void>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$YesterdayCheckoutController extends $AsyncNotifier<void> {
+  FutureOr<void> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, void>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, void>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

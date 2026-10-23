@@ -6,228 +6,261 @@ part of 'home_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(homeRepository)
+final homeRepositoryProvider = HomeRepositoryProvider._();
+
+final class HomeRepositoryProvider
+    extends $FunctionalProvider<HomeRepository, HomeRepository, HomeRepository>
+    with $Provider<HomeRepository> {
+  HomeRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'homeRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$homeRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<HomeRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  HomeRepository create(Ref ref) {
+    return homeRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(HomeRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<HomeRepository>(value),
+    );
+  }
+}
+
 String _$homeRepositoryHash() => r'29e398f1f8843bc28c6e5def3e007fe733f2ba23';
 
-/// See also [homeRepository].
-@ProviderFor(homeRepository)
-final homeRepositoryProvider = AutoDisposeProvider<HomeRepository>.internal(
-  homeRepository,
-  name: r'homeRepositoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$homeRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(fetchAttendanceData)
+final fetchAttendanceDataProvider = FetchAttendanceDataProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef HomeRepositoryRef = AutoDisposeProviderRef<HomeRepository>;
+final class FetchAttendanceDataProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<AttendanceResponse>,
+          AttendanceResponse,
+          FutureOr<AttendanceResponse>
+        >
+    with
+        $FutureModifier<AttendanceResponse>,
+        $FutureProvider<AttendanceResponse> {
+  FetchAttendanceDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchAttendanceDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchAttendanceDataHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<AttendanceResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<AttendanceResponse> create(Ref ref) {
+    return fetchAttendanceData(ref);
+  }
+}
+
 String _$fetchAttendanceDataHash() =>
     r'aae4fc2b443bc2f3fcaa2768e8ec734c38f7fbfe';
 
-/// See also [fetchAttendanceData].
-@ProviderFor(fetchAttendanceData)
-final fetchAttendanceDataProvider =
-    AutoDisposeFutureProvider<AttendanceResponse>.internal(
-      fetchAttendanceData,
-      name: r'fetchAttendanceDataProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$fetchAttendanceDataHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchAttendanceDataRef =
-    AutoDisposeFutureProviderRef<AttendanceResponse>;
-String _$fetchConfigDataHash() => r'25976a193d86e9d149d20116e900bef54d2f8d8e';
-
-/// See also [fetchConfigData].
 @ProviderFor(fetchConfigData)
-final fetchConfigDataProvider =
-    AutoDisposeFutureProvider<ConfigResponse>.internal(
-      fetchConfigData,
-      name: r'fetchConfigDataProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$fetchConfigDataHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+final fetchConfigDataProvider = FetchConfigDataProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchConfigDataRef = AutoDisposeFutureProviderRef<ConfigResponse>;
-String _$fetchEmployeeDashboardHash() =>
-    r'e6e30b9ed07692cddf64222ab8e10599db3ac49b';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [fetchEmployeeDashboard].
-@ProviderFor(fetchEmployeeDashboard)
-const fetchEmployeeDashboardProvider = FetchEmployeeDashboardFamily();
-
-/// See also [fetchEmployeeDashboard].
-class FetchEmployeeDashboardFamily
-    extends Family<AsyncValue<EmployeeDashboardResponse>> {
-  /// See also [fetchEmployeeDashboard].
-  const FetchEmployeeDashboardFamily();
-
-  /// See also [fetchEmployeeDashboard].
-  FetchEmployeeDashboardProvider call({required int year, required int month}) {
-    return FetchEmployeeDashboardProvider(year: year, month: month);
-  }
-
-  @override
-  FetchEmployeeDashboardProvider getProviderOverride(
-    covariant FetchEmployeeDashboardProvider provider,
-  ) {
-    return call(year: provider.year, month: provider.month);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchEmployeeDashboardProvider';
-}
-
-/// See also [fetchEmployeeDashboard].
-class FetchEmployeeDashboardProvider
-    extends AutoDisposeFutureProvider<EmployeeDashboardResponse> {
-  /// See also [fetchEmployeeDashboard].
-  FetchEmployeeDashboardProvider({required int year, required int month})
-    : this._internal(
-        (ref) => fetchEmployeeDashboard(
-          ref as FetchEmployeeDashboardRef,
-          year: year,
-          month: month,
-        ),
-        from: fetchEmployeeDashboardProvider,
-        name: r'fetchEmployeeDashboardProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$fetchEmployeeDashboardHash,
-        dependencies: FetchEmployeeDashboardFamily._dependencies,
-        allTransitiveDependencies:
-            FetchEmployeeDashboardFamily._allTransitiveDependencies,
-        year: year,
-        month: month,
+final class FetchConfigDataProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<ConfigResponse>,
+          ConfigResponse,
+          FutureOr<ConfigResponse>
+        >
+    with $FutureModifier<ConfigResponse>, $FutureProvider<ConfigResponse> {
+  FetchConfigDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchConfigDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
       );
 
-  FetchEmployeeDashboardProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.year,
-    required this.month,
-  }) : super.internal();
+  @override
+  String debugGetCreateSourceHash() => _$fetchConfigDataHash();
 
-  final int year;
-  final int month;
+  @$internal
+  @override
+  $FutureProviderElement<ConfigResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Override overrideWith(
-    FutureOr<EmployeeDashboardResponse> Function(
-      FetchEmployeeDashboardRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchEmployeeDashboardProvider._internal(
-        (ref) => create(ref as FetchEmployeeDashboardRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        year: year,
-        month: month,
-      ),
-    );
+  FutureOr<ConfigResponse> create(Ref ref) {
+    return fetchConfigData(ref);
+  }
+}
+
+String _$fetchConfigDataHash() => r'25976a193d86e9d149d20116e900bef54d2f8d8e';
+
+@ProviderFor(fetchEmployeeDashboard)
+final fetchEmployeeDashboardProvider = FetchEmployeeDashboardFamily._();
+
+final class FetchEmployeeDashboardProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<EmployeeDashboardResponse>,
+          EmployeeDashboardResponse,
+          FutureOr<EmployeeDashboardResponse>
+        >
+    with
+        $FutureModifier<EmployeeDashboardResponse>,
+        $FutureProvider<EmployeeDashboardResponse> {
+  FetchEmployeeDashboardProvider._({
+    required FetchEmployeeDashboardFamily super.from,
+    required ({int year, int month}) super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchEmployeeDashboardProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchEmployeeDashboardHash();
+
+  @override
+  String toString() {
+    return r'fetchEmployeeDashboardProvider'
+        ''
+        '$argument';
   }
 
+  @$internal
   @override
-  AutoDisposeFutureProviderElement<EmployeeDashboardResponse> createElement() {
-    return _FetchEmployeeDashboardProviderElement(this);
+  $FutureProviderElement<EmployeeDashboardResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<EmployeeDashboardResponse> create(Ref ref) {
+    final argument = this.argument as ({int year, int month});
+    return fetchEmployeeDashboard(
+      ref,
+      year: argument.year,
+      month: argument.month,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return other is FetchEmployeeDashboardProvider &&
-        other.year == year &&
-        other.month == month;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, year.hashCode);
-    hash = _SystemHash.combine(hash, month.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FetchEmployeeDashboardRef
-    on AutoDisposeFutureProviderRef<EmployeeDashboardResponse> {
-  /// The parameter `year` of this provider.
-  int get year;
+String _$fetchEmployeeDashboardHash() =>
+    r'e6e30b9ed07692cddf64222ab8e10599db3ac49b';
 
-  /// The parameter `month` of this provider.
-  int get month;
-}
+final class FetchEmployeeDashboardFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          FutureOr<EmployeeDashboardResponse>,
+          ({int year, int month})
+        > {
+  FetchEmployeeDashboardFamily._()
+    : super(
+        retry: null,
+        name: r'fetchEmployeeDashboardProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
-class _FetchEmployeeDashboardProviderElement
-    extends AutoDisposeFutureProviderElement<EmployeeDashboardResponse>
-    with FetchEmployeeDashboardRef {
-  _FetchEmployeeDashboardProviderElement(super.provider);
+  FetchEmployeeDashboardProvider call({
+    required int year,
+    required int month,
+  }) => FetchEmployeeDashboardProvider._(
+    argument: (year: year, month: month),
+    from: this,
+  );
 
   @override
-  int get year => (origin as FetchEmployeeDashboardProvider).year;
-  @override
-  int get month => (origin as FetchEmployeeDashboardProvider).month;
+  String toString() => r'fetchEmployeeDashboardProvider';
 }
 
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+@ProviderFor(fetchAttendanceConfigData)
+final fetchAttendanceConfigDataProvider = FetchAttendanceConfigDataProvider._();
+
+final class FetchAttendanceConfigDataProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<AttendanceConfigResponse>,
+          AttendanceConfigResponse,
+          FutureOr<AttendanceConfigResponse>
+        >
+    with
+        $FutureModifier<AttendanceConfigResponse>,
+        $FutureProvider<AttendanceConfigResponse> {
+  FetchAttendanceConfigDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchAttendanceConfigDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchAttendanceConfigDataHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<AttendanceConfigResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<AttendanceConfigResponse> create(Ref ref) {
+    return fetchAttendanceConfigData(ref);
+  }
+}
+
+String _$fetchAttendanceConfigDataHash() =>
+    r'a3c77048eca8f022ef6503044ffb5e9272741067';

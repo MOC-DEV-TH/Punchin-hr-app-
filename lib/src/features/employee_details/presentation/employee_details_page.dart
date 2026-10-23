@@ -8,7 +8,7 @@ import 'package:hr_app/src/utils/dimens.dart';
 import 'package:hr_app/src/utils/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-
+import 'package:flutter_riverpod/legacy.dart';
 import '../../../common_widgets/approve_confirm_dialog.dart';
 import '../../../common_widgets/approve_success_dialog.dart';
 import '../../../common_widgets/error_retry_view.dart';
@@ -25,6 +25,7 @@ import '../../../network/api_constants.dart';
 import '../../edit_employee/presentation/edit_employee_page.dart';
 import '../../employee_leaves/controller/employee_leaves_controller.dart';
 import '../../employee_wfh_requests/controller/employee_wfh_request_controller.dart';
+import '../../home/model/attendance_response.dart';
 import '../../list_items/employee_wfh_request_item_view.dart';
 import '../model/employee_profile_response.dart';
 import 'leave_summary_page.dart';
@@ -361,6 +362,11 @@ class _AttendanceTabState extends ConsumerState<_AttendanceTab> {
 
     return employeeAttendancesState.when(
       data: (attendanceData) {
+
+        final Attendance? attendance =
+            attendanceData.data.firstOrNull?.attendances.firstOrNull;
+
+
         return CustomScrollView(
           slivers: [
             /// Title
@@ -462,14 +468,10 @@ class _AttendanceTabState extends ConsumerState<_AttendanceTab> {
                                   _TimeChip(
                                     icon: Icons.login,
                                     mirrorIcon: true,
-                                    label:
-                                        data.attendances.first.checkIn ?? '—',
-                                    color:
-                                        isLateAfter930(
-                                              data.attendances.first.checkIn,
-                                            )
-                                            ? kRed
-                                            : kGreen,
+                                    label: attendance?.checkIn ?? '—',
+                                    color: attendance == null
+                                        ? kGrey
+                                        : getCheckInColor(attendance),
                                   ),
                                   const Spacer(),
                                   _TimeChip(
@@ -1327,6 +1329,25 @@ bool isLateAfter930(String? timeText) {
     } catch (_) {
       return false;
     }
+  }
+}
+
+///get check in colour
+Color getCheckInColor(Attendance attendance) {
+  final status = attendance.arrivalStatus?.trim().toLowerCase();
+
+  switch (status) {
+    case kKeyOnTime:
+      return kGreen;
+
+    case kKeyLate:
+      return kRed;
+
+    case kKeyUnScheduled:
+      return isLateAfter930(attendance.checkIn) ? kRed : kGreen;
+
+    default:
+      return isLateAfter930(attendance.checkIn) ? kRed : kGreen;
   }
 }
 

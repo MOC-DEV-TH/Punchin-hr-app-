@@ -1,9 +1,11 @@
 ///Base Url
-const String kBaseUrl = "https://punchin.today/api/v1";
-const String kV2BaseUrl = "https://punchin.today/api/v2";
+// const String kBaseUrl = "https://punchin.today/api/v1";
+// const String kV2BaseUrl = "https://punchin.today/api/v2";
+// const String kV3BaseUrl = "https://punchin.today/api/v3";
 
-// const String kBaseUrl = "https://staging.hrapp.mocinteractive.com/api/v1";
-// const String kV2BaseUrl = "https://staging.hrapp.mocinteractive.com/api/v2";
+const String kBaseUrl = "https://staging.hrapp.mocinteractive.com/api/v1";
+const String kV2BaseUrl = "https://staging.hrapp.mocinteractive.com/api/v2";
+const String kV3BaseUrl = "https://staging.hrapp.mocinteractive.com/api/v3";
 
 const String kImageBaseUrlHttp = "";
 
@@ -51,6 +53,8 @@ const String kEndPointAnnouncementDetails = "/get-announcement-details";
 const String kEndPointUserAddress = "/get-addresses";
 const String kEndPointGetEmployeeWfhRequestByStatus = "/wfh";
 
+const String kEndPointGetAttendanceConfig = "/attendance-config";
+
 
 ///Parameters
 const String kParamApiKey = "api_key";
@@ -69,3 +73,11 @@ const String kLeaveStatusApproved = "approved";
 
 const Duration kApiDeadline = Duration(minutes: 1);
 const Duration kRetryDelay = Duration(seconds: 3);
+
+///Attendance arrival status key
+const String kKeyOnTime = "on_time";
+const String kKeyLate = "late";
+
+const String kKeyUnScheduled = "unscheduled";
+
+

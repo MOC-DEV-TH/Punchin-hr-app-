@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hr_app/src/features/home/model/attendance_config_response.dart';
 import 'package:hr_app/src/features/home/model/attendance_response.dart';
 import 'package:hr_app/src/features/home/model/config_response.dart';
 import 'package:hr_app/src/features/home/model/employee_dashboard_response.dart';
@@ -24,7 +25,8 @@ class HomeRepository {
 
   Dio get _dioV2 => ref.read(dioProvider(baseUrl: kV2BaseUrl));
 
-  SecureStorage get _secureStorage => ref.read(secureStorageProvider);
+  Dio get _dioV3 => ref.read(dioProvider(baseUrl: kV3BaseUrl));
+
 
   ///compute period working hour
   ({String clockInText, String clockOutText, String periodText})
@@ -63,20 +65,38 @@ class HomeRepository {
     }
   }
 
+  ///get config attendance
+  Future<AttendanceConfigResponse> fetchAttendanceConfig() async {
+    try {
+      final response = await _dioV3.get(kEndPointGetAttendanceConfig);
+      AttendanceConfigResponse data = AttendanceConfigResponse.fromJson(
+        response.data,
+      );
+      return data;
+    } on DioException catch (e) {
+      throw e.response?.data["message"] ??
+          ErrorHandler.handle(e).failure.message;
+    }
+  }
+
   /// check in
   Future<String> checkIn({
     required String type,
     int? addressId,
     String? currentTimezone,
+    double? lat,
+    double? long
   }) async {
     try {
       final requestData = <String, dynamic>{
         'type': type,
+        'lat' : lat,
+        'long' : long,
         if (addressId != null) 'address_id': addressId,
         if (currentTimezone != null) 'time_zone': currentTimezone,
       };
 
-      final response = await _dioV2.post(kEndPointCheckIn, data: requestData);
+      final response = await _dioV3.post(kEndPointCheckIn, data: requestData);
 
       final rawResponse = response.data;
 
@@ -135,7 +155,7 @@ class HomeRepository {
 
   Future<bool> checkOut({String? reason}) async {
     try {
-      final response = await _dioV2.post(
+      final response = await _dioV3.post(
         kEndPointCheckOut,
         data: {
           if (reason != null && reason.trim().isNotEmpty)
@@ -263,9 +283,7 @@ class HomeRepository {
   /// Fetch latest attendance status
   Future<AttendanceStatusResponse> fetchLatestAttendanceStatus() async {
     try {
-      final response = await _dioV2.get(
-        kEndPointLatestAttendanceStatus,
-      );
+      final response = await _dioV2.get(kEndPointLatestAttendanceStatus);
 
       debugPrint('Latest Attendance status response: ${response.data}');
 
@@ -299,7 +317,7 @@ class HomeRepository {
   Future<bool> updateYesterdayCheckout({
     required int userId,
     required String time,
-    required String date
+    required String date,
   }) async {
     try {
       final requestData = <String, dynamic>{
@@ -363,10 +381,7 @@ class HomeRepository {
     try {
       final response = await dio.get(
         kEndPointGetEmployeeDashboard,
-        queryParameters: {
-          'year': year,
-          'month': month,
-        },
+        queryParameters: {'year': year, 'month': month},
       );
 
       final rawData = response.data;
@@ -381,15 +396,12 @@ class HomeRepository {
     } on DioException catch (error) {
       final errorData = error.response?.data;
 
-      String message =
-          ErrorHandler.handle(error).failure.message;
+      String message = ErrorHandler.handle(error).failure.message;
 
       if (errorData is Map) {
-        final serverMessage =
-        errorData['message']?.toString().trim();
+        final serverMessage = errorData['message']?.toString().trim();
 
-        if (serverMessage != null &&
-            serverMessage.isNotEmpty) {
+        if (serverMessage != null && serverMessage.isNotEmpty) {
           message = serverMessage;
         }
       }
@@ -397,40 +409,40 @@ class HomeRepository {
       throw Exception(message);
     }
   }
-
 }
 
 @riverpod
-HomeRepository homeRepository(HomeRepositoryRef ref) {
+HomeRepository homeRepository(Ref ref) {
   return HomeRepository(dio: ref.watch(dioProvider()), ref: ref);
 }
 
 @riverpod
 Future<AttendanceResponse> fetchAttendanceData(
-  FetchAttendanceDataRef ref,
+    Ref ref,
 ) async {
   final provider = ref.watch(homeRepositoryProvider);
   return provider.fetchAttendanceData();
 }
 
 @riverpod
-Future<ConfigResponse> fetchConfigData(FetchConfigDataRef ref) async {
+Future<ConfigResponse> fetchConfigData(Ref ref) async {
   final provider = ref.watch(homeRepositoryProvider);
   return provider.fetchConfig();
 }
 
 @riverpod
 Future<EmployeeDashboardResponse> fetchEmployeeDashboard(
-    FetchEmployeeDashboardRef ref, {
-      required int year,
-      required int month,
-    }) async {
-  final repository = ref.watch(
-    homeRepositoryProvider,
-  );
+    Ref ref, {
+  required int year,
+  required int month,
+}) async {
+  final repository = ref.watch(homeRepositoryProvider);
 
-  return repository.fetchEmployeeDashboard(
-    year: year,
-    month: month,
-  );
+  return repository.fetchEmployeeDashboard(year: year, month: month);
+}
+
+@riverpod
+Future<AttendanceConfigResponse> fetchAttendanceConfigData(Ref ref) async {
+  final provider = ref.watch(homeRepositoryProvider);
+  return provider.fetchAttendanceConfig();
 }

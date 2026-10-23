@@ -36,6 +36,7 @@ import '../../../utils/secure_storage.dart';
 import '../controller/yesterday_checkout_controller.dart';
 
 import '../model/attendance_status_response.dart';
+import '../model/attendance_config_response.dart'; // Adjust path if needed
 import '../model/user_address_response.dart';
 import '../model/work_location.dart';
 
@@ -63,6 +64,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   WorkLocation? _selectedLocation;
+  int? _selectedAttendanceOfficeId;
 
   bool _isShowLoadingView = false;
 
@@ -228,6 +230,304 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   }
 
   /// ===========================================================
+  /// ATTENDANCE OFFICE SELECTION
+  /// ===========================================================
+
+  AttendanceOffice? _resolveOffice(List<AttendanceOffice> offices) {
+    if (offices.isEmpty) return null;
+    if (offices.length == 1) return offices.first;
+    for (final office in offices) {
+      if (office.id != null && office.id == _selectedAttendanceOfficeId) {
+        return office;
+      }
+    }
+    return null;
+  }
+
+  Future<void> _showOfficeSelectionSheet(List<AttendanceOffice> offices) async {
+    if (offices.length <= 1) return;
+
+    final selected = await showModalBottomSheet<AttendanceOffice>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) {
+        int? pendingId = _resolveOffice(offices)?.id;
+
+        return StatefulBuilder(
+          builder: (context, updateSheet) {
+            AttendanceOffice? pendingOffice;
+            for (final office in offices) {
+              if (office.id != null && office.id == pendingId) {
+                pendingOffice = office;
+                break;
+              }
+            }
+
+            return Container(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.sizeOf(context).height * 0.82,
+              ),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+              ),
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          width: 42,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 22),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: kPrimaryColor.withOpacity(0.10),
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: const Icon(
+                              Icons.apartment_rounded,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Select attendance office',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  'Choose where you will check in or out.',
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: const Icon(Icons.close_rounded),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Flexible(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: offices.length,
+                          separatorBuilder:
+                              (_, __) => const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            final office = offices[index];
+                            final chosen =
+                                office.id != null && office.id == pendingId;
+
+                            return Material(
+                              color:
+                                  chosen
+                                      ? kPrimaryColor.withOpacity(0.07)
+                                      : Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(16),
+                                onTap:
+                                    office.id == null
+                                        ? null
+                                        : () => updateSheet(() {
+                                          pendingId = office.id;
+                                        }),
+                                child: Container(
+                                  padding: const EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color:
+                                          chosen
+                                              ? kPrimaryColor
+                                              : Colors.grey.shade200,
+                                      width: chosen ? 1.5 : 1,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.business_outlined,
+                                        color:
+                                            chosen
+                                                ? kPrimaryColor
+                                                : Colors.black54,
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          office.name ??
+                                              'Office ${office.id ?? index + 1}',
+                                          style: TextStyle(
+                                            fontWeight:
+                                                chosen
+                                                    ? FontWeight.w700
+                                                    : FontWeight.w500,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                      Icon(
+                                        chosen
+                                            ? Icons.check_circle_rounded
+                                            : Icons.circle_outlined,
+                                        color:
+                                            chosen
+                                                ? kPrimaryColor
+                                                : Colors.grey.shade400,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52,
+                        child: ElevatedButton(
+                          onPressed:
+                              pendingOffice == null
+                                  ? null
+                                  : () => Navigator.pop(context, pendingOffice),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: kPrimaryColor,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          child: const Text(
+                            'Confirm office',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    if (!mounted || selected == null) return;
+
+    setState(() {
+      _selectedAttendanceOfficeId = selected.id;
+      _selectedLocation = null;
+    });
+  }
+
+  Widget _buildOfficeSelector({required List<AttendanceOffice> offices}) {
+    if (offices.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        child: Text('No attendance office is assigned to your account.'),
+      );
+    }
+
+    final office = _resolveOffice(offices);
+    final canChoose = offices.length > 1;
+
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: canChoose ? () => _showOfficeSelectionSheet(offices) : null,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color:
+                  office == null
+                      ? Colors.orange.shade300
+                      : Colors.grey.shade300,
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: kPrimaryColor.withOpacity(0.09),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.apartment_rounded,
+                  color: kPrimaryColor,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Attendance office',
+                      style: TextStyle(color: Colors.black54, fontSize: 12),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      office?.name ?? 'Tap to select an office',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (canChoose)
+                const Icon(
+                  Icons.keyboard_arrow_right_rounded,
+                  color: kPrimaryColor,
+                )
+              else
+                const Icon(Icons.check_circle_rounded, color: kPrimaryColor),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// ===========================================================
   /// WORK LOCATION
   /// ===========================================================
 
@@ -338,10 +638,15 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   Future<void> _handleCheckInTap({
     required WorkLocation? selectedLocation,
     required List<AddressVO> addresses,
-    required double? officeLatitude,
-    required double? officeLongitude,
-    required int? allowedDistance,
+    required AttendanceOffice? office,
   }) async {
+    if (office == null) {
+      if (mounted) {
+        context.showErrorSnackBar('Please select an attendance office first.');
+      }
+      return;
+    }
+
     if (selectedLocation == null) {
       if (!mounted) {
         return;
@@ -358,16 +663,16 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     if (selectedLocation == WorkLocation.workFromHome) {
       await _handleWorkFromHomeCheckIn(
         addresses: addresses,
-        allowDistanceRadius: allowedDistance,
+        allowDistanceRadius: office.allowClockInRange,
       );
 
       return;
     }
 
     await _handleOfficeCheckIn(
-      lat: officeLatitude,
-      long: officeLongitude,
-      allowDistanceRadius: allowedDistance,
+      lat: office.lat,
+      long: office.long,
+      allowDistanceRadius: office.allowClockInRange,
     );
   }
 
@@ -378,102 +683,82 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   Future<void> _handleOfficeCheckIn({
     required double? lat,
     required double? long,
-    required int? allowDistanceRadius,
+    required double? allowDistanceRadius,
   }) async {
-    if (_isShowLoadingView) {
-      return;
-    }
+    if (_isShowLoadingView) return;
 
     _setLoading(true);
 
     try {
       final isRemoteAllowed = _isRemoteLoginAllowed();
 
-      debugPrint(
-        'RemoteLoginStatus >>> '
-        '$isRemoteAllowed',
+      debugPrint('RemoteLoginStatus >>> $isRemoteAllowed');
+
+      final locationReady = await _ensureLocationReady(
+        errorTitle: 'Check-In Failed',
+        permissionMessage: 'Location permission is required to check in.',
       );
 
-      // Remote login does not require
-      // GPS/radius validation.
-      if (isRemoteAllowed) {
-        await _submitOfficeCheckIn();
+      if (!locationReady || !mounted) return;
 
-        return;
-      }
+      final currentPosition = await LocationService.getCurrentPosition();
 
-      if (lat == null || long == null) {
-        if (mounted) {
+      if (!mounted) return;
+
+      final userLat = currentPosition.latitude;
+      final userLong = currentPosition.longitude;
+
+      debugPrint('Employee Lat >>> $userLat');
+      debugPrint('Employee Long >>> $userLong');
+
+      if (!isRemoteAllowed) {
+        if (lat == null || long == null) {
           context.showErrorDialog(
             'Office location is not configured correctly.',
             'Check-In Failed',
           );
+          return;
         }
 
-        return;
-      }
-
-      if (allowDistanceRadius == null || allowDistanceRadius <= 0) {
-        if (mounted) {
+        if (allowDistanceRadius == null || allowDistanceRadius <= 0) {
           context.showErrorDialog(
             'The allowed office check-in distance '
                 'is not configured.',
             'Check-In Failed',
           );
-        }
-
-        return;
-      }
-
-      final locationReady = await _ensureLocationReady(
-        errorTitle: 'Check-In Failed',
-        permissionMessage:
-            'Location permission is required '
-            'to check in from the office.',
-      );
-
-      if (!locationReady || !mounted) {
-        return;
-      }
-
-      final isWithinRadius = await LocationService.isWithinOfficeRadius(
-        lat,
-        long,
-        allowDistanceRadius.toDouble(),
-      );
-
-      debugPrint(
-        'Office Check-In '
-        'IsWithinRadius >>> '
-        '$isWithinRadius',
-      );
-
-      if (!isWithinRadius) {
-        if (!mounted) {
           return;
         }
 
-        context.showErrorDialog(
-          'You must be within the allowed '
-              'office distance to check in.',
-          'Check-In Failed',
+        final isWithinRadius = await LocationService.isWithinOfficeRadius(
+          lat,
+          long,
+          allowDistanceRadius,
         );
 
-        return;
+        if (!mounted) return;
+
+        debugPrint('Office Check-In IsWithinRadius >>> $isWithinRadius');
+
+        if (!isWithinRadius) {
+          context.showErrorDialog(
+            'You must be within the allowed '
+                'office distance to check in.',
+            'Check-In Failed',
+          );
+          return;
+        }
       }
 
-      await _submitOfficeCheckIn();
+      await _submitOfficeCheckIn(lat: userLat, long: userLong);
     } catch (error, stackTrace) {
       debugPrint('Office check-in error: $error');
-
       debugPrintStack(stackTrace: stackTrace);
 
-      if (!mounted) {
-        return;
-      }
+      if (!mounted) return;
 
       context.showErrorDialog(
-        'Something went wrong while checking in.',
+        'Unable to get your current location '
+            'or complete check-in.',
         'Check-In Failed',
       );
     } finally {
@@ -481,14 +766,20 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     }
   }
 
-  Future<void> _submitOfficeCheckIn() async {
+  Future<void> _submitOfficeCheckIn({
+    required double lat,
+    required double long,
+  }) async {
     final success = await ref
         .read(checkInControllerProvider.notifier)
-        .checkIn(type: kTypeOffice, currentTimezone: currentTimezone);
+        .checkIn(
+          type: kTypeOffice,
+          currentTimezone: currentTimezone,
+          lat: lat,
+          long: long,
+        );
 
-    if (!mounted) {
-      return;
-    }
+    if (!mounted) return;
 
     if (success) {
       await _afterSuccessfulCheckIn();
@@ -501,14 +792,12 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
   Future<void> _handleWorkFromHomeCheckIn({
     required List<AddressVO> addresses,
-    required int? allowDistanceRadius,
+    required double? allowDistanceRadius,
   }) async {
     if (_isShowLoadingView || ref.read(checkInControllerProvider).isLoading) {
       return;
     }
 
-    // Show location chooser first.
-    // GPS permission is requested only when necessary.
     final selectedAddressId = await showWfhLocationDialog(
       context,
       addresses: addresses,
@@ -521,12 +810,6 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     _setLoading(true);
 
     try {
-      // =========================================
-      // WORK FROM SOMEWHERE
-      // =========================================
-      //
-      // -1 means Work From Somewhere.
-      // No GPS validation is required.
       if (selectedAddressId == -1) {
         final success = await ref
             .read(checkInControllerProvider.notifier)
@@ -546,10 +829,6 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
         return;
       }
-
-      // =========================================
-      // SAVED WFH ADDRESS
-      // =========================================
 
       final selectedAddress = _findAddressById(addresses, selectedAddressId);
 
@@ -686,9 +965,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     required String clockInText,
     required String clockOutText,
     required String periodText,
-    required double? officeLatitude,
-    required double? officeLongitude,
-    required int? allowedLogoutDistance,
+    required AttendanceOffice? office,
   }) async {
     if (workLocation == null) {
       if (!mounted) {
@@ -697,6 +974,13 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
       context.showErrorSnackBar('Unable to identify today\'s work location.');
 
+      return;
+    }
+
+    if (office == null && workLocation != WorkLocation.workFromHome) {
+      if (mounted) {
+        context.showErrorSnackBar('Please select an attendance office first.');
+      }
       return;
     }
 
@@ -715,9 +999,9 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
         }
 
         await _handleOfficeCheckOut(
-          lat: officeLatitude,
-          long: officeLongitude,
-          allowDistanceRadius: allowedLogoutDistance,
+          lat: office?.lat,
+          long: office?.long,
+          allowDistanceRadius: office?.allowClockOutRange,
         );
       },
     );
@@ -730,7 +1014,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   Future<void> _handleOfficeCheckOut({
     required double? lat,
     required double? long,
-    required int? allowDistanceRadius,
+    required double? allowDistanceRadius,
   }) async {
     if (_isShowLoadingView || _isSubmittingCheckOut) {
       return;
@@ -1000,7 +1284,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
     final addresses = ref.watch(employeeAddressesLocalProvider);
 
-    final configState = ref.watch(fetchConfigDataProvider);
+    final configState = ref.watch(fetchAttendanceConfigDataProvider);
 
     final checkInState = ref.watch(checkInControllerProvider);
 
@@ -1088,18 +1372,12 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
                   /// OFFICE CONFIG
                   /// ===============================
 
-                  final officeLatitude = double.tryParse(
-                    configData.data?.businessUnit?.lat ?? '',
-                  );
-
-                  final officeLongitude = double.tryParse(
-                    configData.data?.businessUnit?.long ?? '',
-                  );
-
-                  final allowedCheckInDistance = configData.data?.allowDistance;
-
-                  final allowedCheckOutDistance =
-                      configData.data?.allowLogoutDistance;
+                  final offices =
+                      configData.data?.attendanceOffices ??
+                      <AttendanceOffice>[];
+                  final selectedOffice = _resolveOffice(offices);
+                  final mustChooseOffice =
+                      offices.length > 1 && selectedOffice == null;
 
                   /// ===============================
                   /// LIVE CLOCK
@@ -1151,12 +1429,37 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
                                       20.vGap,
 
+                                      /// OFFICE SELECTION (before attendance type)
+                                      _buildOfficeSelector(offices: offices),
+                                      16.vGap,
+
                                       /// WORK LOCATION
-                                      WorkLocationSelector(
-                                        selectedLocation: _selectedLocation,
-                                        savedLocation: savedWorkLocation,
-                                        onChanged: _changeWorkLocation,
+                                      IgnorePointer(
+                                        ignoring:
+                                            mustChooseOffice || offices.isEmpty,
+                                        child: Opacity(
+                                          opacity:
+                                              mustChooseOffice ||
+                                                      offices.isEmpty
+                                                  ? 0.45
+                                                  : 1,
+                                          child: WorkLocationSelector(
+                                            selectedLocation: _selectedLocation,
+                                            savedLocation: savedWorkLocation,
+                                            onChanged: _changeWorkLocation,
+                                          ),
+                                        ),
                                       ),
+                                      if (mustChooseOffice)
+                                        const Padding(
+                                          padding: EdgeInsets.only(top: 8),
+                                          child: Text(
+                                            'Select your office before selecting a check-in type.',
+                                            style: TextStyle(
+                                              color: Colors.redAccent,
+                                            ),
+                                          ),
+                                        ),
 
                                       40.vGap,
 
@@ -1219,10 +1522,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
                                               selectedLocation:
                                                   _selectedLocation,
                                               addresses: addresses,
-                                              officeLatitude: officeLatitude,
-                                              officeLongitude: officeLongitude,
-                                              allowedDistance:
-                                                  allowedCheckInDistance,
+                                              office: selectedOffice,
                                             );
                                           },
 
@@ -1241,10 +1541,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
                                               clockInText: clockInText,
                                               clockOutText: clockOutText,
                                               periodText: periodText,
-                                              officeLatitude: officeLatitude,
-                                              officeLongitude: officeLongitude,
-                                              allowedLogoutDistance:
-                                                  allowedCheckOutDistance,
+                                              office: selectedOffice,
                                             );
                                           },
                                         ),
@@ -1301,7 +1598,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
                 title: 'Error loading config',
                 message: error.toString(),
                 onRetry: () {
-                  ref.invalidate(fetchConfigDataProvider);
+                  ref.invalidate(fetchAttendanceConfigDataProvider);
 
                   _loadLatestAttendanceStatus();
                 },

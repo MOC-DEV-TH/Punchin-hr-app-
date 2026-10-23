@@ -12,6 +12,7 @@ import 'package:hr_app/src/routing/go_router/go_router_delegate.dart';
 import 'package:hr_app/src/utils/colors.dart';
 import 'package:hr_app/src/utils/fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 import 'firebase_options.dart';
 

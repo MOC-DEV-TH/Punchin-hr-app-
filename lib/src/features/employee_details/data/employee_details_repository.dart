@@ -123,14 +123,14 @@ class EmployeeDetailsRepository {
 
 @riverpod
 EmployeeDetailsRepository employeeDetailsRepository(
-  EmployeeDetailsRepositoryRef ref,
+    Ref ref,
 ) {
   return EmployeeDetailsRepository(dio: ref.watch(dioProvider()), ref: ref);
 }
 
 @riverpod
 Future<EmployeeProfileResponse> fetchEmployeeProfileData(
-  FetchEmployeeProfileDataRef ref, {
+    Ref ref, {
   required int userID,
 }) async {
   final provider = ref.watch(employeeDetailsRepositoryProvider);
@@ -139,7 +139,7 @@ Future<EmployeeProfileResponse> fetchEmployeeProfileData(
 
 @riverpod
 Future<LeaveStatusResponse> fetchEmployeeLeavesData(
-  FetchEmployeeLeavesDataRef ref, {
+    Ref ref, {
   required int userID,
       required String leaveStatus
 }) async {
@@ -149,7 +149,7 @@ Future<LeaveStatusResponse> fetchEmployeeLeavesData(
 
 @riverpod
 Future<AttendanceResponse> fetchEmployeeAttendancesData(
-    FetchEmployeeAttendancesDataRef ref, {
+    Ref ref, {
       required int userID,
       required String year,
       required String month
@@ -160,7 +160,7 @@ Future<AttendanceResponse> fetchEmployeeAttendancesData(
 
 @riverpod
 Future<LeaveSummaryResponse> fetchEmployeeLeaveSummaryData(
-    FetchEmployeeLeaveSummaryDataRef ref, {
+    Ref ref, {
       required int userID,
     }) async {
   final provider = ref.watch(employeeDetailsRepositoryProvider);
@@ -169,7 +169,7 @@ Future<LeaveSummaryResponse> fetchEmployeeLeaveSummaryData(
 
 @riverpod
 Future<ProfileWfhRequestsResponse> fetchEmployeeWfhRequestData(
-    FetchEmployeeWfhRequestDataRef ref, {
+    Ref ref, {
       required int userID,
       required String status,
       required int pageNo

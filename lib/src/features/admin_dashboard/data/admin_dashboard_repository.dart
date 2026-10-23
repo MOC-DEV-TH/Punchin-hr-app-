@@ -89,14 +89,14 @@ class AdminDashboardRepository {
 
 @riverpod
 AdminDashboardRepository adminDashboardRepository(
-  AdminDashboardRepositoryRef ref,
+    Ref ref,
 ) {
   return AdminDashboardRepository(dio: ref.watch(dioProvider()), ref: ref);
 }
 
 @riverpod
 Future<BusinessUnitResponse> fetchBusinessUnits(
-  FetchBusinessUnitsRef ref,
+    Ref ref,
 ) async {
   final provider = ref.watch(adminDashboardRepositoryProvider);
   return provider.fetchBusinessUnitData();
@@ -104,7 +104,7 @@ Future<BusinessUnitResponse> fetchBusinessUnits(
 
 @riverpod
 Future<AdminDashboardResponse> fetchAdminDashboardData(
-  FetchAdminDashboardDataRef ref, {
+    Ref ref, {
   required int businessUnitId,
   required String date,
 }) async {

@@ -6,220 +6,151 @@ part of 'employees_attendances_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$employeesAttendancesRepositoryHash() =>
-    r'105f1361bd9b42d64a725204486c21f3ff14484b';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [employeesAttendancesRepository].
 @ProviderFor(employeesAttendancesRepository)
 final employeesAttendancesRepositoryProvider =
-    AutoDisposeProvider<EmployeesAttendancesRepository>.internal(
-      employeesAttendancesRepository,
-      name: r'employeesAttendancesRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$employeesAttendancesRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+    EmployeesAttendancesRepositoryProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef EmployeesAttendancesRepositoryRef =
-    AutoDisposeProviderRef<EmployeesAttendancesRepository>;
-String _$fetchEmployeesAttendancesHash() =>
-    r'cf5b6036b8181eee96649eceaa8548c793013dd3';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [fetchEmployeesAttendances].
-@ProviderFor(fetchEmployeesAttendances)
-const fetchEmployeesAttendancesProvider = FetchEmployeesAttendancesFamily();
-
-/// See also [fetchEmployeesAttendances].
-class FetchEmployeesAttendancesFamily
-    extends Family<AsyncValue<EmployeesAttendancesResponse>> {
-  /// See also [fetchEmployeesAttendances].
-  const FetchEmployeesAttendancesFamily();
-
-  /// See also [fetchEmployeesAttendances].
-  FetchEmployeesAttendancesProvider call({
-    required int businessUnitId,
-    required String date,
-    required int pageNo,
-  }) {
-    return FetchEmployeesAttendancesProvider(
-      businessUnitId: businessUnitId,
-      date: date,
-      pageNo: pageNo,
-    );
-  }
-
-  @override
-  FetchEmployeesAttendancesProvider getProviderOverride(
-    covariant FetchEmployeesAttendancesProvider provider,
-  ) {
-    return call(
-      businessUnitId: provider.businessUnitId,
-      date: provider.date,
-      pageNo: provider.pageNo,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchEmployeesAttendancesProvider';
-}
-
-/// See also [fetchEmployeesAttendances].
-class FetchEmployeesAttendancesProvider
-    extends AutoDisposeFutureProvider<EmployeesAttendancesResponse> {
-  /// See also [fetchEmployeesAttendances].
-  FetchEmployeesAttendancesProvider({
-    required int businessUnitId,
-    required String date,
-    required int pageNo,
-  }) : this._internal(
-         (ref) => fetchEmployeesAttendances(
-           ref as FetchEmployeesAttendancesRef,
-           businessUnitId: businessUnitId,
-           date: date,
-           pageNo: pageNo,
-         ),
-         from: fetchEmployeesAttendancesProvider,
-         name: r'fetchEmployeesAttendancesProvider',
-         debugGetCreateSourceHash:
-             const bool.fromEnvironment('dart.vm.product')
-                 ? null
-                 : _$fetchEmployeesAttendancesHash,
-         dependencies: FetchEmployeesAttendancesFamily._dependencies,
-         allTransitiveDependencies:
-             FetchEmployeesAttendancesFamily._allTransitiveDependencies,
-         businessUnitId: businessUnitId,
-         date: date,
-         pageNo: pageNo,
-       );
-
-  FetchEmployeesAttendancesProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.businessUnitId,
-    required this.date,
-    required this.pageNo,
-  }) : super.internal();
-
-  final int businessUnitId;
-  final String date;
-  final int pageNo;
-
-  @override
-  Override overrideWith(
-    FutureOr<EmployeesAttendancesResponse> Function(
-      FetchEmployeesAttendancesRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchEmployeesAttendancesProvider._internal(
-        (ref) => create(ref as FetchEmployeesAttendancesRef),
-        from: from,
-        name: null,
+final class EmployeesAttendancesRepositoryProvider
+    extends
+        $FunctionalProvider<
+          EmployeesAttendancesRepository,
+          EmployeesAttendancesRepository,
+          EmployeesAttendancesRepository
+        >
+    with $Provider<EmployeesAttendancesRepository> {
+  EmployeesAttendancesRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'employeesAttendancesRepositoryProvider',
+        isAutoDispose: true,
         dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        businessUnitId: businessUnitId,
-        date: date,
-        pageNo: pageNo,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$employeesAttendancesRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<EmployeesAttendancesRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  EmployeesAttendancesRepository create(Ref ref) {
+    return employeesAttendancesRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(EmployeesAttendancesRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<EmployeesAttendancesRepository>(
+        value,
       ),
     );
   }
+}
+
+String _$employeesAttendancesRepositoryHash() =>
+    r'105f1361bd9b42d64a725204486c21f3ff14484b';
+
+@ProviderFor(fetchEmployeesAttendances)
+final fetchEmployeesAttendancesProvider = FetchEmployeesAttendancesFamily._();
+
+final class FetchEmployeesAttendancesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<EmployeesAttendancesResponse>,
+          EmployeesAttendancesResponse,
+          FutureOr<EmployeesAttendancesResponse>
+        >
+    with
+        $FutureModifier<EmployeesAttendancesResponse>,
+        $FutureProvider<EmployeesAttendancesResponse> {
+  FetchEmployeesAttendancesProvider._({
+    required FetchEmployeesAttendancesFamily super.from,
+    required ({int businessUnitId, String date, int pageNo}) super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchEmployeesAttendancesProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
-  AutoDisposeFutureProviderElement<EmployeesAttendancesResponse>
-  createElement() {
-    return _FetchEmployeesAttendancesProviderElement(this);
+  String debugGetCreateSourceHash() => _$fetchEmployeesAttendancesHash();
+
+  @override
+  String toString() {
+    return r'fetchEmployeesAttendancesProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<EmployeesAttendancesResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<EmployeesAttendancesResponse> create(Ref ref) {
+    final argument =
+        this.argument as ({int businessUnitId, String date, int pageNo});
+    return fetchEmployeesAttendances(
+      ref,
+      businessUnitId: argument.businessUnitId,
+      date: argument.date,
+      pageNo: argument.pageNo,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return other is FetchEmployeesAttendancesProvider &&
-        other.businessUnitId == businessUnitId &&
-        other.date == date &&
-        other.pageNo == pageNo;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, businessUnitId.hashCode);
-    hash = _SystemHash.combine(hash, date.hashCode);
-    hash = _SystemHash.combine(hash, pageNo.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FetchEmployeesAttendancesRef
-    on AutoDisposeFutureProviderRef<EmployeesAttendancesResponse> {
-  /// The parameter `businessUnitId` of this provider.
-  int get businessUnitId;
+String _$fetchEmployeesAttendancesHash() =>
+    r'cf5b6036b8181eee96649eceaa8548c793013dd3';
 
-  /// The parameter `date` of this provider.
-  String get date;
+final class FetchEmployeesAttendancesFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          FutureOr<EmployeesAttendancesResponse>,
+          ({int businessUnitId, String date, int pageNo})
+        > {
+  FetchEmployeesAttendancesFamily._()
+    : super(
+        retry: null,
+        name: r'fetchEmployeesAttendancesProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
-  /// The parameter `pageNo` of this provider.
-  int get pageNo;
+  FetchEmployeesAttendancesProvider call({
+    required int businessUnitId,
+    required String date,
+    required int pageNo,
+  }) => FetchEmployeesAttendancesProvider._(
+    argument: (businessUnitId: businessUnitId, date: date, pageNo: pageNo),
+    from: this,
+  );
+
+  @override
+  String toString() => r'fetchEmployeesAttendancesProvider';
 }
-
-class _FetchEmployeesAttendancesProviderElement
-    extends AutoDisposeFutureProviderElement<EmployeesAttendancesResponse>
-    with FetchEmployeesAttendancesRef {
-  _FetchEmployeesAttendancesProviderElement(super.provider);
-
-  @override
-  int get businessUnitId =>
-      (origin as FetchEmployeesAttendancesProvider).businessUnitId;
-  @override
-  String get date => (origin as FetchEmployeesAttendancesProvider).date;
-  @override
-  int get pageNo => (origin as FetchEmployeesAttendancesProvider).pageNo;
-}
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -10,7 +10,7 @@ import 'package:hr_app/src/utils/colors.dart';
 import 'package:hr_app/src/utils/dimens.dart';
 import 'package:hr_app/src/utils/extensions.dart';
 import 'package:hr_app/src/utils/gap.dart';
-
+import 'package:flutter_riverpod/legacy.dart';
 import '../../../common_widgets/custom_drawer.dart';
 import '../../../common_widgets/custom_toolbar_with_logo.dart';
 import '../../../common_widgets/error_retry_view.dart';

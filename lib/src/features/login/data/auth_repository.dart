@@ -1,5 +1,5 @@
+
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hr_app/src/features/login/model/login_response.dart';
@@ -14,13 +14,14 @@ import '../../../utils/secure_storage.dart';
 part 'auth_repository.g.dart';
 
 class AuthRepository {
-  AuthRepository({required this.dio, required this.ref});
+  AuthRepository({
+    required this.dio,
+    required this.secureStorage,
+  });
 
   final Dio dio;
-  final Ref ref;
+  final SecureStorage secureStorage;
 
-  ///login
-  /// Login
   Future<void> login({
     required String email,
     required String password,
@@ -30,27 +31,6 @@ class AuthRepository {
     }
 
     try {
-      final baseOptions = BaseOptions(
-        baseUrl: kBaseUrl,
-
-        // Time allowed to connect to the server
-        connectTimeout: const Duration(seconds: 30),
-
-        // Time allowed to receive the server response
-        receiveTimeout: const Duration(seconds: 30),
-
-        // Time allowed to send request data
-        sendTimeout: const Duration(seconds: 30),
-
-        responseType: ResponseType.json,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      );
-
-      final dio = Dio(baseOptions);
-
       final response = await dio.post(
         kEndPointLogin,
         data: {
@@ -63,9 +43,7 @@ class AuthRepository {
 
       if (responseData is! Map ||
           responseData['data'] is! Map) {
-        throw Exception(
-          'Invalid login response.',
-        );
+        throw Exception('Invalid login response.');
       }
 
       final data = Map<String, dynamic>.from(
@@ -91,30 +69,29 @@ class AuthRepository {
         rawUser,
       );
 
+      final user = UserVO.fromJson(userData);
+
       final tokenBox = GetStorage();
 
+      // Save access token
       await tokenBox.write(
         SecureDataList.authToken.name,
         accessToken,
       );
 
+      // Save user role
       if (role != null && role.isNotEmpty) {
-        await ref
-            .read(secureStorageProvider)
-            .saveLoginUserRole(role);
+        await secureStorage.saveLoginUserRole(role);
       }
 
+      // Save remote login permission
       await tokenBox.write(
         SecureDataList.isRemoteLogin.name,
-        userData['allow_remote_login']
-            ?.toString(),
+        userData['allow_remote_login']?.toString(),
       );
 
-      await ref
-          .read(secureStorageProvider)
-          .saveUser(
-        UserVO.fromJson(userData),
-      );
+      // Save logged-in user
+      await secureStorage.saveUser(user);
     } on DioException catch (error) {
       final errorData = error.response?.data;
 
@@ -144,12 +121,15 @@ class AuthRepository {
               .message;
       }
     } catch (error) {
-      throw error.toString();
+      rethrow;
     }
   }
 }
 
 @riverpod
-AuthRepository authRepositoryNoToken(AuthRepositoryNoTokenRef ref) {
-  return AuthRepository(dio: ref.watch(dioNoTokenProvider), ref: ref);
+AuthRepository authRepositoryNoToken(Ref ref) {
+  return AuthRepository(
+    dio: ref.watch(dioNoTokenProvider),
+    secureStorage: ref.watch(secureStorageProvider),
+  );
 }

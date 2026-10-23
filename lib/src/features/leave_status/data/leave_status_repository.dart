@@ -29,13 +29,13 @@ class LeaveStatusRepository {
 }
 
 @riverpod
-LeaveStatusRepository leaveStatusRepository(LeaveStatusRepositoryRef ref) {
+LeaveStatusRepository leaveStatusRepository(Ref ref) {
   return LeaveStatusRepository(dio: ref.watch(dioProvider()));
 }
 
 @riverpod
 Future<LeaveStatusResponse> fetchLeaveStatusData(
-  FetchLeaveStatusDataRef ref,
+    Ref ref,
 ) async {
   final provider = ref.watch(leaveStatusRepositoryProvider);
   return provider.fetchLeaveStatus();

@@ -59,13 +59,15 @@ class Attendance {
   String? checkIn;
   String? checkOut;
   String? workLocation;
+  String? arrivalStatus;
 
-  Attendance({this.userId, this.checkIn, this.checkOut, this.workLocation});
+  Attendance({this.userId, this.checkIn, this.checkOut, this.workLocation,this.arrivalStatus});
 
   factory Attendance.fromJson(Map<String, dynamic> json) => Attendance(
     userId: json["user_id"],
     checkIn: json["check_in"],
     checkOut: json["check_out"],
+    arrivalStatus: json["arrival_status"],
     workLocation: json["work_location"],
   );
 
@@ -73,6 +75,7 @@ class Attendance {
     "user_id": userId,
     "check_in": checkIn,
     "check_out": checkOut,
+    "arrival_status": arrivalStatus,
     "work_location": workLocation,
   };
 }

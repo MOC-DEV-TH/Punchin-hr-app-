@@ -49,18 +49,18 @@ class EmployeeListRepository {
 }
 
 @riverpod
-EmployeeListRepository employeeListRepository(EmployeeListRepositoryRef ref) {
+EmployeeListRepository employeeListRepository(Ref ref) {
   return EmployeeListRepository(dio: ref.watch(dioProvider()),ref:  ref);
 }
 
 @riverpod
-Future<EmployeeListResponse> fetchEmployeeListData(FetchEmployeeListDataRef ref,{required int pageNo}) async {
+Future<EmployeeListResponse> fetchEmployeeListData(Ref ref,{required int pageNo}) async {
   final provider = ref.watch(employeeListRepositoryProvider);
   return provider.fetchEmployees(pageNo:pageNo);
 }
 
 @riverpod
-Future<EmployeeListResponse> searchEmployeeListData(SearchEmployeeListDataRef ref,{required String query}) async {
+Future<EmployeeListResponse> searchEmployeeListData(Ref ref,{required String query}) async {
   final provider = ref.watch(employeeListRepositoryProvider);
   return provider.searchEmployees(query:query);
 }

@@ -42,14 +42,14 @@ class EmployeesAttendancesRepository {
 
 @riverpod
 EmployeesAttendancesRepository employeesAttendancesRepository(
-  EmployeesAttendancesRepositoryRef ref,
+    Ref ref,
 ) {
   return EmployeesAttendancesRepository(dio: ref.watch(dioProvider()), ref: ref);
 }
 
 @riverpod
 Future<EmployeesAttendancesResponse> fetchEmployeesAttendances(
-  FetchEmployeesAttendancesRef ref, {
+    Ref ref, {
   required int businessUnitId,
   required String date,
   required int pageNo,

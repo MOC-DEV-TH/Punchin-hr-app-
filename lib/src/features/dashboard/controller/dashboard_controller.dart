@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final dashboardControllerProvider = StateNotifierProvider<DashboardController,int>((ref) {
   return DashboardController(0);

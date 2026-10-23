@@ -8,6 +8,7 @@ import '../../../utils/colors.dart';
 import '../../../utils/dimens.dart';
 import '../controller/dashboard_controller.dart';
 import '../widget/bottom_navigation_widget.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 ///notification count provider
 final notificationCountProvider = StateProvider<int>((ref) {

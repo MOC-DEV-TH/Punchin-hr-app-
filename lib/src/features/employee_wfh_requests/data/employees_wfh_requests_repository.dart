@@ -38,12 +38,16 @@ class EmployeesWfhRequestsRepository {
       );
       return WfhRequestsResponse.fromJson(res.data);
     } on DioException catch (e) {
-      throw e.response?.data["message"] ?? ErrorHandler.handle(e).failure.message;
+      throw e.response?.data["message"] ??
+          ErrorHandler.handle(e).failure.message;
     }
   }
 
   ///update employee leave request
-  Future<void> updateEmployeeWfhRequest({required int id,required String status}) async {
+  Future<void> updateEmployeeWfhRequest({
+    required int id,
+    required String status,
+  }) async {
     try {
       final response = await dio.put(
         kEndPointUpdateWfhRequest,
@@ -54,17 +58,22 @@ class EmployeesWfhRequestsRepository {
           ErrorHandler.handle(e).failure.message;
     }
   }
-
 }
 
 @riverpod
-EmployeesWfhRequestsRepository employeesWfhRequestsRepository(EmployeesWfhRequestsRepositoryRef ref) {
+EmployeesWfhRequestsRepository employeesWfhRequestsRepository(Ref ref) {
   return EmployeesWfhRequestsRepository(dio: ref.watch(dioProvider()));
 }
 
 @riverpod
 Future<WfhRequestsResponse> fetchAllEmployeesWfhRequest(
-    FetchAllEmployeesWfhRequestRef ref,{String? date,String? leaveStatus,}) async {
+  Ref ref, {
+  String? date,
+  String? leaveStatus,
+}) async {
   final provider = ref.watch(employeesWfhRequestsRepositoryProvider);
-  return provider.fetchAllEmployeesWfhRequests(date: date,leaveStatus: leaveStatus);
+  return provider.fetchAllEmployeesWfhRequests(
+    date: date,
+    leaveStatus: leaveStatus,
+  );
 }

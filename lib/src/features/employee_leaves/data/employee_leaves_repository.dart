@@ -72,14 +72,14 @@ class EmployeeLeavesRepository {
 
 @riverpod
 EmployeeLeavesRepository employeeLeavesRepository(
-  EmployeeLeavesRepositoryRef ref,
+    Ref ref,
 ) {
   return EmployeeLeavesRepository(dio: ref.watch(dioProvider()), ref: ref);
 }
 
 @riverpod
 Future<LeaveStatusResponse> fetchAllEmployeeLeaves(
-  FetchAllEmployeeLeavesRef ref, {
+    Ref ref, {
   String? date,
   String? leaveStatus,
 }) async {

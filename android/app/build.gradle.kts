@@ -1,14 +1,17 @@
+
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id ("com.google.gms.google-services")
+    id("com.google.gms.google-services")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
     namespace = "com.example.hr_app"
-    compileSdk = 35
-    ndkVersion = "25.1.8937393"
+    compileSdk = 37
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -16,29 +19,36 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     defaultConfig {
         applicationId = "com.moc.hr_app"
         minSdk = flutter.minSdkVersion
-        targetSdk = 33
+        targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-
-        multiDexEnabled = true
     }
 
     buildTypes {
         release {
+            // Existing debug signing configuration.
+            // Configure release signing before publishing.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
 }
 
+// Kotlin compiler configuration
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
+    }
+}
+
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    // Required by flutter_local_notifications
+    coreLibraryDesugaring(
+        "com.android.tools:desugar_jdk_libs:2.1.4"
+    )
+
     implementation("androidx.multidex:multidex:2.0.1")
 }
 

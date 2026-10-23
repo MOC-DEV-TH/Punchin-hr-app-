@@ -55,13 +55,13 @@ class NewDashboardRepository {
 }
 
 @riverpod
-NewDashboardRepository newDashboardRepository(NewDashboardRepositoryRef ref) {
+NewDashboardRepository newDashboardRepository(Ref ref) {
   return NewDashboardRepository(dio: ref.watch(dioProvider()),ref: ref);
 }
 
 @riverpod
 Future<AttendanceOverviewResponse> fetchDashboardAttendedOverview(
-  FetchDashboardAttendedOverviewRef ref,{String? date}
+    Ref ref,{String? date}
 ) async {
   final provider = ref.watch(newDashboardRepositoryProvider);
   return provider.fetchAttendanceOverviewData(date: date);
@@ -69,7 +69,7 @@ Future<AttendanceOverviewResponse> fetchDashboardAttendedOverview(
 
 @riverpod
 Future<TotalEmployeeResponse> fetchTotalEmployeeData(
-    FetchTotalEmployeeDataRef ref,{String? date}
+    Ref ref,{String? date}
     ) async {
   final provider = ref.watch(newDashboardRepositoryProvider);
   return provider.fetchTotalEmployeeData();

@@ -6,170 +6,127 @@ part of 'holiday_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$holidayRepositoryHash() => r'8f76ea9f1e22b89cfd614af385dd00a65fddec7b';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [holidayRepository].
 @ProviderFor(holidayRepository)
-final holidayRepositoryProvider =
-    AutoDisposeProvider<HolidayRepository>.internal(
-      holidayRepository,
-      name: r'holidayRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$holidayRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+final holidayRepositoryProvider = HolidayRepositoryProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef HolidayRepositoryRef = AutoDisposeProviderRef<HolidayRepository>;
-String _$fetchHolidaysHash() => r'9a8626d9dbf7fda0bf1473a655642e3d4e1a1a89';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [fetchHolidays].
-@ProviderFor(fetchHolidays)
-const fetchHolidaysProvider = FetchHolidaysFamily();
-
-/// See also [fetchHolidays].
-class FetchHolidaysFamily extends Family<AsyncValue<HolidayResponse>> {
-  /// See also [fetchHolidays].
-  const FetchHolidaysFamily();
-
-  /// See also [fetchHolidays].
-  FetchHolidaysProvider call({int? businessUnitId}) {
-    return FetchHolidaysProvider(businessUnitId: businessUnitId);
-  }
-
-  @override
-  FetchHolidaysProvider getProviderOverride(
-    covariant FetchHolidaysProvider provider,
-  ) {
-    return call(businessUnitId: provider.businessUnitId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchHolidaysProvider';
-}
-
-/// See also [fetchHolidays].
-class FetchHolidaysProvider extends AutoDisposeFutureProvider<HolidayResponse> {
-  /// See also [fetchHolidays].
-  FetchHolidaysProvider({int? businessUnitId})
-    : this._internal(
-        (ref) => fetchHolidays(
-          ref as FetchHolidaysRef,
-          businessUnitId: businessUnitId,
-        ),
-        from: fetchHolidaysProvider,
-        name: r'fetchHolidaysProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$fetchHolidaysHash,
-        dependencies: FetchHolidaysFamily._dependencies,
-        allTransitiveDependencies:
-            FetchHolidaysFamily._allTransitiveDependencies,
-        businessUnitId: businessUnitId,
+final class HolidayRepositoryProvider
+    extends
+        $FunctionalProvider<
+          HolidayRepository,
+          HolidayRepository,
+          HolidayRepository
+        >
+    with $Provider<HolidayRepository> {
+  HolidayRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'holidayRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
       );
 
-  FetchHolidaysProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.businessUnitId,
-  }) : super.internal();
+  @override
+  String debugGetCreateSourceHash() => _$holidayRepositoryHash();
 
-  final int? businessUnitId;
+  @$internal
+  @override
+  $ProviderElement<HolidayRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
-  Override overrideWith(
-    FutureOr<HolidayResponse> Function(FetchHolidaysRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchHolidaysProvider._internal(
-        (ref) => create(ref as FetchHolidaysRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        businessUnitId: businessUnitId,
-      ),
-    );
+  HolidayRepository create(Ref ref) {
+    return holidayRepository(ref);
   }
 
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(HolidayRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<HolidayRepository>(value),
+    );
+  }
+}
+
+String _$holidayRepositoryHash() => r'8f76ea9f1e22b89cfd614af385dd00a65fddec7b';
+
+@ProviderFor(fetchHolidays)
+final fetchHolidaysProvider = FetchHolidaysFamily._();
+
+final class FetchHolidaysProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<HolidayResponse>,
+          HolidayResponse,
+          FutureOr<HolidayResponse>
+        >
+    with $FutureModifier<HolidayResponse>, $FutureProvider<HolidayResponse> {
+  FetchHolidaysProvider._({
+    required FetchHolidaysFamily super.from,
+    required int? super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchHolidaysProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
   @override
-  AutoDisposeFutureProviderElement<HolidayResponse> createElement() {
-    return _FetchHolidaysProviderElement(this);
+  String debugGetCreateSourceHash() => _$fetchHolidaysHash();
+
+  @override
+  String toString() {
+    return r'fetchHolidaysProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<HolidayResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<HolidayResponse> create(Ref ref) {
+    final argument = this.argument as int?;
+    return fetchHolidays(ref, businessUnitId: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchHolidaysProvider &&
-        other.businessUnitId == businessUnitId;
+    return other is FetchHolidaysProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, businessUnitId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FetchHolidaysRef on AutoDisposeFutureProviderRef<HolidayResponse> {
-  /// The parameter `businessUnitId` of this provider.
-  int? get businessUnitId;
-}
+String _$fetchHolidaysHash() => r'9a8626d9dbf7fda0bf1473a655642e3d4e1a1a89';
 
-class _FetchHolidaysProviderElement
-    extends AutoDisposeFutureProviderElement<HolidayResponse>
-    with FetchHolidaysRef {
-  _FetchHolidaysProviderElement(super.provider);
+final class FetchHolidaysFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<HolidayResponse>, int?> {
+  FetchHolidaysFamily._()
+    : super(
+        retry: null,
+        name: r'fetchHolidaysProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  FetchHolidaysProvider call({int? businessUnitId}) =>
+      FetchHolidaysProvider._(argument: businessUnitId, from: this);
 
   @override
-  int? get businessUnitId => (origin as FetchHolidaysProvider).businessUnitId;
+  String toString() => r'fetchHolidaysProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

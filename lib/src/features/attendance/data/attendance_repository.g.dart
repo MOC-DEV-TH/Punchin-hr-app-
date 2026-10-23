@@ -6,25 +6,53 @@ part of 'attendance_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(attendanceRepository)
+final attendanceRepositoryProvider = AttendanceRepositoryProvider._();
+
+final class AttendanceRepositoryProvider
+    extends
+        $FunctionalProvider<
+          AttendanceRepository,
+          AttendanceRepository,
+          AttendanceRepository
+        >
+    with $Provider<AttendanceRepository> {
+  AttendanceRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'attendanceRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$attendanceRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<AttendanceRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AttendanceRepository create(Ref ref) {
+    return attendanceRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AttendanceRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AttendanceRepository>(value),
+    );
+  }
+}
+
 String _$attendanceRepositoryHash() =>
     r'2660500cc4b0407138023454f30c1d6e49033a56';
-
-/// See also [attendanceRepository].
-@ProviderFor(attendanceRepository)
-final attendanceRepositoryProvider =
-    AutoDisposeProvider<AttendanceRepository>.internal(
-      attendanceRepository,
-      name: r'attendanceRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$attendanceRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AttendanceRepositoryRef = AutoDisposeProviderRef<AttendanceRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

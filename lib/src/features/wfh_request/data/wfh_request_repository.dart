@@ -50,6 +50,6 @@ class WfhRequestRepository {
 }
 
 @riverpod
-WfhRequestRepository wfhRequestRepository(WfhRequestRepositoryRef ref) {
+WfhRequestRepository wfhRequestRepository(Ref ref) {
   return WfhRequestRepository(dio: ref.watch(dioProvider()), ref: ref);
 }

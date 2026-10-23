@@ -6,311 +6,214 @@ part of 'announcement_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(announcementRepository)
+final announcementRepositoryProvider = AnnouncementRepositoryProvider._();
+
+final class AnnouncementRepositoryProvider
+    extends
+        $FunctionalProvider<
+          AnnouncementRepository,
+          AnnouncementRepository,
+          AnnouncementRepository
+        >
+    with $Provider<AnnouncementRepository> {
+  AnnouncementRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'announcementRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$announcementRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<AnnouncementRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AnnouncementRepository create(Ref ref) {
+    return announcementRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AnnouncementRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AnnouncementRepository>(value),
+    );
+  }
+}
+
 String _$announcementRepositoryHash() =>
     r'e2c9727bf75729ab35c6e9baac1649ff1d129f25';
 
-/// See also [announcementRepository].
-@ProviderFor(announcementRepository)
-final announcementRepositoryProvider =
-    AutoDisposeProvider<AnnouncementRepository>.internal(
-      announcementRepository,
-      name: r'announcementRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$announcementRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AnnouncementRepositoryRef =
-    AutoDisposeProviderRef<AnnouncementRepository>;
-String _$fetchAnnouncementsHash() =>
-    r'761b36f94c1f923ff6b8860c3a790e4c995c576a';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [fetchAnnouncements].
 @ProviderFor(fetchAnnouncements)
-const fetchAnnouncementsProvider = FetchAnnouncementsFamily();
+final fetchAnnouncementsProvider = FetchAnnouncementsFamily._();
 
-/// See also [fetchAnnouncements].
-class FetchAnnouncementsFamily
-    extends Family<AsyncValue<AnnouncementResponse>> {
-  /// See also [fetchAnnouncements].
-  const FetchAnnouncementsFamily();
+final class FetchAnnouncementsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<AnnouncementResponse>,
+          AnnouncementResponse,
+          FutureOr<AnnouncementResponse>
+        >
+    with
+        $FutureModifier<AnnouncementResponse>,
+        $FutureProvider<AnnouncementResponse> {
+  FetchAnnouncementsProvider._({
+    required FetchAnnouncementsFamily super.from,
+    required int? super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchAnnouncementsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// See also [fetchAnnouncements].
-  FetchAnnouncementsProvider call({int? businessUnitId}) {
-    return FetchAnnouncementsProvider(businessUnitId: businessUnitId);
+  @override
+  String debugGetCreateSourceHash() => _$fetchAnnouncementsHash();
+
+  @override
+  String toString() {
+    return r'fetchAnnouncementsProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  FetchAnnouncementsProvider getProviderOverride(
-    covariant FetchAnnouncementsProvider provider,
-  ) {
-    return call(businessUnitId: provider.businessUnitId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  $FutureProviderElement<AnnouncementResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchAnnouncementsProvider';
-}
-
-/// See also [fetchAnnouncements].
-class FetchAnnouncementsProvider
-    extends AutoDisposeFutureProvider<AnnouncementResponse> {
-  /// See also [fetchAnnouncements].
-  FetchAnnouncementsProvider({int? businessUnitId})
-    : this._internal(
-        (ref) => fetchAnnouncements(
-          ref as FetchAnnouncementsRef,
-          businessUnitId: businessUnitId,
-        ),
-        from: fetchAnnouncementsProvider,
-        name: r'fetchAnnouncementsProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$fetchAnnouncementsHash,
-        dependencies: FetchAnnouncementsFamily._dependencies,
-        allTransitiveDependencies:
-            FetchAnnouncementsFamily._allTransitiveDependencies,
-        businessUnitId: businessUnitId,
-      );
-
-  FetchAnnouncementsProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.businessUnitId,
-  }) : super.internal();
-
-  final int? businessUnitId;
-
-  @override
-  Override overrideWith(
-    FutureOr<AnnouncementResponse> Function(FetchAnnouncementsRef provider)
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchAnnouncementsProvider._internal(
-        (ref) => create(ref as FetchAnnouncementsRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        businessUnitId: businessUnitId,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<AnnouncementResponse> createElement() {
-    return _FetchAnnouncementsProviderElement(this);
+  FutureOr<AnnouncementResponse> create(Ref ref) {
+    final argument = this.argument as int?;
+    return fetchAnnouncements(ref, businessUnitId: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchAnnouncementsProvider &&
-        other.businessUnitId == businessUnitId;
+    return other is FetchAnnouncementsProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, businessUnitId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FetchAnnouncementsRef
-    on AutoDisposeFutureProviderRef<AnnouncementResponse> {
-  /// The parameter `businessUnitId` of this provider.
-  int? get businessUnitId;
-}
+String _$fetchAnnouncementsHash() =>
+    r'761b36f94c1f923ff6b8860c3a790e4c995c576a';
 
-class _FetchAnnouncementsProviderElement
-    extends AutoDisposeFutureProviderElement<AnnouncementResponse>
-    with FetchAnnouncementsRef {
-  _FetchAnnouncementsProviderElement(super.provider);
-
-  @override
-  int? get businessUnitId =>
-      (origin as FetchAnnouncementsProvider).businessUnitId;
-}
-
-String _$fetchAnnouncementDetailByIDHash() =>
-    r'282d2e79cba90bdfa9cedbd72598a6657ef608d9';
-
-/// See also [fetchAnnouncementDetailByID].
-@ProviderFor(fetchAnnouncementDetailByID)
-const fetchAnnouncementDetailByIDProvider = FetchAnnouncementDetailByIDFamily();
-
-/// See also [fetchAnnouncementDetailByID].
-class FetchAnnouncementDetailByIDFamily
-    extends Family<AsyncValue<AnnouncementDetailResponse>> {
-  /// See also [fetchAnnouncementDetailByID].
-  const FetchAnnouncementDetailByIDFamily();
-
-  /// See also [fetchAnnouncementDetailByID].
-  FetchAnnouncementDetailByIDProvider call({required int announcementID}) {
-    return FetchAnnouncementDetailByIDProvider(announcementID: announcementID);
-  }
-
-  @override
-  FetchAnnouncementDetailByIDProvider getProviderOverride(
-    covariant FetchAnnouncementDetailByIDProvider provider,
-  ) {
-    return call(announcementID: provider.announcementID);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchAnnouncementDetailByIDProvider';
-}
-
-/// See also [fetchAnnouncementDetailByID].
-class FetchAnnouncementDetailByIDProvider
-    extends AutoDisposeFutureProvider<AnnouncementDetailResponse> {
-  /// See also [fetchAnnouncementDetailByID].
-  FetchAnnouncementDetailByIDProvider({required int announcementID})
-    : this._internal(
-        (ref) => fetchAnnouncementDetailByID(
-          ref as FetchAnnouncementDetailByIDRef,
-          announcementID: announcementID,
-        ),
-        from: fetchAnnouncementDetailByIDProvider,
-        name: r'fetchAnnouncementDetailByIDProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$fetchAnnouncementDetailByIDHash,
-        dependencies: FetchAnnouncementDetailByIDFamily._dependencies,
-        allTransitiveDependencies:
-            FetchAnnouncementDetailByIDFamily._allTransitiveDependencies,
-        announcementID: announcementID,
+final class FetchAnnouncementsFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<AnnouncementResponse>, int?> {
+  FetchAnnouncementsFamily._()
+    : super(
+        retry: null,
+        name: r'fetchAnnouncementsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  FetchAnnouncementDetailByIDProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.announcementID,
-  }) : super.internal();
-
-  final int announcementID;
+  FetchAnnouncementsProvider call({int? businessUnitId}) =>
+      FetchAnnouncementsProvider._(argument: businessUnitId, from: this);
 
   @override
-  Override overrideWith(
-    FutureOr<AnnouncementDetailResponse> Function(
-      FetchAnnouncementDetailByIDRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchAnnouncementDetailByIDProvider._internal(
-        (ref) => create(ref as FetchAnnouncementDetailByIDRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        announcementID: announcementID,
-      ),
-    );
+  String toString() => r'fetchAnnouncementsProvider';
+}
+
+@ProviderFor(fetchAnnouncementDetailByID)
+final fetchAnnouncementDetailByIDProvider =
+    FetchAnnouncementDetailByIDFamily._();
+
+final class FetchAnnouncementDetailByIDProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<AnnouncementDetailResponse>,
+          AnnouncementDetailResponse,
+          FutureOr<AnnouncementDetailResponse>
+        >
+    with
+        $FutureModifier<AnnouncementDetailResponse>,
+        $FutureProvider<AnnouncementDetailResponse> {
+  FetchAnnouncementDetailByIDProvider._({
+    required FetchAnnouncementDetailByIDFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'fetchAnnouncementDetailByIDProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchAnnouncementDetailByIDHash();
+
+  @override
+  String toString() {
+    return r'fetchAnnouncementDetailByIDProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeFutureProviderElement<AnnouncementDetailResponse> createElement() {
-    return _FetchAnnouncementDetailByIDProviderElement(this);
+  $FutureProviderElement<AnnouncementDetailResponse> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<AnnouncementDetailResponse> create(Ref ref) {
+    final argument = this.argument as int;
+    return fetchAnnouncementDetailByID(ref, announcementID: argument);
   }
 
   @override
   bool operator ==(Object other) {
     return other is FetchAnnouncementDetailByIDProvider &&
-        other.announcementID == announcementID;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, announcementID.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FetchAnnouncementDetailByIDRef
-    on AutoDisposeFutureProviderRef<AnnouncementDetailResponse> {
-  /// The parameter `announcementID` of this provider.
-  int get announcementID;
-}
+String _$fetchAnnouncementDetailByIDHash() =>
+    r'282d2e79cba90bdfa9cedbd72598a6657ef608d9';
 
-class _FetchAnnouncementDetailByIDProviderElement
-    extends AutoDisposeFutureProviderElement<AnnouncementDetailResponse>
-    with FetchAnnouncementDetailByIDRef {
-  _FetchAnnouncementDetailByIDProviderElement(super.provider);
+final class FetchAnnouncementDetailByIDFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<AnnouncementDetailResponse>, int> {
+  FetchAnnouncementDetailByIDFamily._()
+    : super(
+        retry: null,
+        name: r'fetchAnnouncementDetailByIDProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  FetchAnnouncementDetailByIDProvider call({required int announcementID}) =>
+      FetchAnnouncementDetailByIDProvider._(
+        argument: announcementID,
+        from: this,
+      );
 
   @override
-  int get announcementID =>
-      (origin as FetchAnnouncementDetailByIDProvider).announcementID;
+  String toString() => r'fetchAnnouncementDetailByIDProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

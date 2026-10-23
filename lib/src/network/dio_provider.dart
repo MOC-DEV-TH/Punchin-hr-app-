@@ -9,7 +9,7 @@ import 'deadline_retry_interceptor.dart';
 part 'dio_provider.g.dart';
 
 @riverpod
-Dio dio(DioRef ref, {String? baseUrl}) {
+Dio dio(Ref ref, {String? baseUrl}) {
   final token = GetStorage().read(SecureDataList.authToken.name) as String?;
 
   final dio = Dio(

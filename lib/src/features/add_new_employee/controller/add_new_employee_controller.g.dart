@@ -6,23 +6,50 @@ part of 'add_new_employee_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(AddNewEmployeeController)
+final addNewEmployeeControllerProvider = AddNewEmployeeControllerProvider._();
+
+final class AddNewEmployeeControllerProvider
+    extends $AsyncNotifierProvider<AddNewEmployeeController, void> {
+  AddNewEmployeeControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'addNewEmployeeControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$addNewEmployeeControllerHash();
+
+  @$internal
+  @override
+  AddNewEmployeeController create() => AddNewEmployeeController();
+}
+
 String _$addNewEmployeeControllerHash() =>
     r'8e76bc26a53b68886936e9f175c7146d7db27686';
 
-/// See also [AddNewEmployeeController].
-@ProviderFor(AddNewEmployeeController)
-final addNewEmployeeControllerProvider =
-    AutoDisposeAsyncNotifierProvider<AddNewEmployeeController, void>.internal(
-      AddNewEmployeeController.new,
-      name: r'addNewEmployeeControllerProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$addNewEmployeeControllerHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$AddNewEmployeeController = AutoDisposeAsyncNotifier<void>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$AddNewEmployeeController extends $AsyncNotifier<void> {
+  FutureOr<void> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, void>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, void>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

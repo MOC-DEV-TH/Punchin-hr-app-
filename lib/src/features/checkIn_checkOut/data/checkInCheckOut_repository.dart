@@ -14,6 +14,6 @@ class CheckInCheckOutRepository {
 }
 
 @riverpod
-CheckInCheckOutRepository checkInCheckOutRepository(CheckInCheckOutRepositoryRef ref) {
+CheckInCheckOutRepository checkInCheckOutRepository(Ref ref) {
   return CheckInCheckOutRepository(dio: ref.watch(dioProvider()));
 }

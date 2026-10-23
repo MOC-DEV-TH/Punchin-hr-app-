@@ -291,103 +291,103 @@ class SecureStorage {
 }
 
 @Riverpod(keepAlive: true)
-SecureStorage secureStorage(SecureStorageRef ref) {
+SecureStorage secureStorage(Ref ref) {
   return SecureStorage();
 }
 
 @riverpod
-Future<String?> getAuthStatus(GetAuthStatusRef ref) {
+Future<String?> getAuthStatus(Ref ref) {
   final provider = ref.watch(secureStorageProvider);
   return provider.getAuthStatus();
 }
 
 @riverpod
-Future<String?> getLoginUserRole(GetLoginUserRoleRef ref) {
+Future<String?> getLoginUserRole(Ref ref) {
   final provider = ref.watch(secureStorageProvider);
   return provider.getLoginUserRole();
 }
 
 @riverpod
-Future<String?> getRemoteLoginStatus(GetRemoteLoginStatusRef ref) {
+Future<String?> getRemoteLoginStatus(Ref ref) {
   final provider = ref.watch(secureStorageProvider);
   return provider.getRemoteLoginStatus();
 }
 
 @riverpod
-Future<UserVO?> getUserData(GetUserDataRef ref) {
+Future<UserVO?> getUserData(Ref ref) {
   final provider = ref.watch(secureStorageProvider);
   return provider.getUser();
 }
 
 @riverpod
-Future<List<LeaveTypeVO>?> getLeaveTypes(GetLeaveTypesRef ref) {
+Future<List<LeaveTypeVO>?> getLeaveTypes(Ref ref) {
   final provider = ref.watch(secureStorageProvider);
   return provider.getLeaveTypes();
 }
 
 @riverpod
-Future<EmployeeDropdownVO?> employeeDropdownLocal(EmployeeDropdownLocalRef ref) {
+Future<EmployeeDropdownVO?> employeeDropdownLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getEmployeeDropdown();
 }
 
 @riverpod
-Future<List<IDNameVO>> countriesLocal(CountriesLocalRef ref) {
+Future<List<IDNameVO>> countriesLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getCountries();
 }
 
 @riverpod
-Future<List<IDNameVO>> businessUnitsLocal(BusinessUnitsLocalRef ref) {
+Future<List<IDNameVO>> businessUnitsLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getBusinessUnits();
 }
 
 @riverpod
-Future<List<IDNameVO>> departmentsLocal(DepartmentsLocalRef ref) {
+Future<List<IDNameVO>> departmentsLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getDepartments();
 }
 
 @riverpod
-Future<List<IDNameVO>> positionsLocal(PositionsLocalRef ref) {
+Future<List<IDNameVO>> positionsLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getPositions();
 }
 
 @riverpod
-Future<List<IDNameVO>> rolesLocal(RolesLocalRef ref) {
+Future<List<IDNameVO>> rolesLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getRoles();
 }
 
 @riverpod
-Future<List<IDNameVO>> employeeTypesLocal(EmployeeTypesLocalRef ref) {
+Future<List<IDNameVO>> employeeTypesLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getEmployeeTypes();
 }
 
 @riverpod
 Future<List<BusinessUnitVO>> businessUnitsAllLocal(
-    BusinessUnitsAllLocalRef ref) {
+    Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getBusinessUnitsAll();
 }
 
 @riverpod
-List<AddressVO> employeeAddressesLocal(EmployeeAddressesLocalRef ref) {
+List<AddressVO> employeeAddressesLocal(Ref ref) {
   final store = ref.watch(secureStorageProvider);
   return store.getEmployeeAddressesSync();
 }
 
 @riverpod
-String? getCheckInDate(GetCheckInDateRef ref) {
+String? getCheckInDate(Ref ref) {
   final storage = ref.watch(secureStorageProvider);
   return storage.getCheckInDate();
 }
 
 @riverpod
-int? getUserId(GetUserIdRef ref) {
+int? getUserId(Ref ref) {
   final storage = ref.watch(
     secureStorageProvider,
   );
