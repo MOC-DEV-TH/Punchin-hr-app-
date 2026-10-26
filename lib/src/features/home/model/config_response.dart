@@ -31,8 +31,8 @@ class ConfigResponse {
 }
 
 class ConfigData {
-  int? allowDistance;
-  int? allowLogoutDistance;
+  double? allowDistance;
+  double? allowLogoutDistance;
   BusinessUnit? businessUnit;
 
   ConfigData({

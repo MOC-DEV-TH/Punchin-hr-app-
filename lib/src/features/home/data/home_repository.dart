@@ -56,6 +56,8 @@ class HomeRepository {
     try {
       final response = await dio.get(kEndPointGetConfig);
       ConfigResponse data = ConfigResponse.fromJson(response.data);
+
+      debugPrint("Distance>>>>${data.data?.allowDistance}");
       return data;
     } on DioException catch (e) {
       throw e.response?.data["message"] ??

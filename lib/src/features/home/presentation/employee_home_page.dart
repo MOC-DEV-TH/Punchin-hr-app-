@@ -340,7 +340,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     required List<AddressVO> addresses,
     required double? officeLatitude,
     required double? officeLongitude,
-    required int? allowedDistance,
+    required double? allowedDistance,
   }) async {
     if (selectedLocation == null) {
       if (!mounted) {
@@ -378,7 +378,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   Future<void> _handleOfficeCheckIn({
     required double? lat,
     required double? long,
-    required int? allowDistanceRadius,
+    required double? allowDistanceRadius,
   }) async {
     if (_isShowLoadingView) {
       return;
@@ -501,7 +501,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
 
   Future<void> _handleWorkFromHomeCheckIn({
     required List<AddressVO> addresses,
-    required int? allowDistanceRadius,
+    required double? allowDistanceRadius,
   }) async {
     if (_isShowLoadingView || ref.read(checkInControllerProvider).isLoading) {
       return;
@@ -688,7 +688,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
     required String periodText,
     required double? officeLatitude,
     required double? officeLongitude,
-    required int? allowedLogoutDistance,
+    required double? allowedLogoutDistance,
   }) async {
     if (workLocation == null) {
       if (!mounted) {
@@ -730,7 +730,7 @@ class _EmployeeHomePageState extends ConsumerState<EmployeeHomePage> {
   Future<void> _handleOfficeCheckOut({
     required double? lat,
     required double? long,
-    required int? allowDistanceRadius,
+    required double? allowDistanceRadius,
   }) async {
     if (_isShowLoadingView || _isSubmittingCheckOut) {
       return;
