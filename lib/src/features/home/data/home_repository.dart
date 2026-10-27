@@ -90,8 +90,8 @@ class HomeRepository {
     try {
       final requestData = <String, dynamic>{
         'type': type,
-        'lat' : lat,
-        'long' : long,
+        if (lat != null) 'lat': lat,
+        if (long != null) 'long': long,
         if (addressId != null) 'address_id': addressId,
         if (currentTimezone != null) 'time_zone': currentTimezone,
       };
