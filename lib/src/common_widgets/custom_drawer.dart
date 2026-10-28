@@ -288,7 +288,7 @@ class CustomDrawer extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(kMarginMedium),
                 child: Text(
-                  'Punchin v1.7.1',
+                  'Punchin v1.7.2',
                   style: TextStyle(color: Colors.grey[500], fontSize: 12),
                 ),
               ),
